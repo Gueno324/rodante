@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>rodante | Archivo Visual</title>
     
-    <!-- FAVICON (El icono que aparece en la pestaña del navegador) -->
-    <link rel="icon" type="image/png" href="logo inclinado negro.png">
+    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=3">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -44,9 +43,8 @@
             gap: 12px;
         }
 
-        /* Logotipo de cabecera ajustado al texto */
         .header-icon {
-            width: 32px; /* Tamaño aumentado acorde al texto */
+            width: 32px; 
             height: 32px;
             filter: invert(1); 
             opacity: 0.9;
@@ -64,16 +62,13 @@
             pointer-events: auto;
             cursor: pointer;
             transition: opacity 0.3s ease;
-            margin-right: -1.2em; /* Compensa el tracking del final para centrar */
+            margin-right: -1.2em; 
         }
         .logo:hover { opacity: 0.6; }
 
         /* --- CONTENIDO PRINCIPAL --- */
-        main {
-            flex: 1;
-        }
+        main { flex: 1; }
 
-        /* --- PORTADA (NIVEL 1) --- */
         .main-gallery {
             display: flex;
             flex-direction: column;
@@ -83,11 +78,7 @@
             transition: opacity 0.5s ease;
         }
 
-        .row {
-            display: flex;
-            gap: 1vh;
-            height: 45vh;
-        }
+        .row { display: flex; gap: 1vh; height: 45vh; }
 
         .photo-item {
             position: relative;
@@ -98,9 +89,7 @@
             transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        @media (min-width: 1024px) {
-            .photo-item:hover { flex: 2; }
-        }
+        @media (min-width: 1024px) { .photo-item:hover { flex: 2; } }
 
         .photo-item img {
             width: 100%;
@@ -110,10 +99,7 @@
             transition: transform 1.2s ease, opacity 0.6s ease;
         }
 
-        .photo-item:hover img {
-            opacity: 1;
-            transform: scale(1.05);
-        }
+        .photo-item:hover img { opacity: 1; transform: scale(1.05); }
 
         .label {
             position: absolute;
@@ -128,7 +114,7 @@
             border-left: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* --- VISTA DE CARPETA (NIVEL 2) --- */
+        /* --- VISTA DE CARPETA --- */
         #folder-view {
             display: none;
             padding: 200px 20px 40px;
@@ -143,192 +129,72 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
             max-width: 1600px;
             margin: 0 auto;
         }
 
-        .grid-item {
-            aspect-ratio: 1/1;
-            overflow: hidden;
-            cursor: pointer;
-            background: #0d0d0d;
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease, opacity 0.4s ease;
-            opacity: 0.7;
-        }
-
-        .grid-item:hover img {
-            transform: scale(1.08);
-            opacity: 1;
-        }
+        .grid-item { aspect-ratio: 16/9; overflow: hidden; cursor: pointer; background: #0d0d0d; }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease, opacity 0.4s ease; opacity: 0.7; }
+        .grid-item:hover img { transform: scale(1.08); opacity: 1; }
 
         .back-btn {
-            display: block;
-            margin: 0 auto 50px;
-            font-size: 10px;
-            letter-spacing: 0.4em;
-            text-transform: lowercase;
-            color: rgba(255,255,255,0.4);
-            cursor: pointer;
-            transition: color 0.3s;
-            text-align: center;
-            width: fit-content;
+            display: block; margin: 0 auto 50px; font-size: 10px; letter-spacing: 0.4em;
+            text-transform: lowercase; color: rgba(255,255,255,0.4); cursor: pointer; text-align: center; width: fit-content;
         }
         .back-btn:hover { color: white; }
 
-        /* --- PIE DE PÁGINA --- */
-        .footer {
-            padding: 30px 20px; 
-            text-align: center;
-            font-weight: 200;
-            text-transform: lowercase;
-            color: rgba(255,255,255,0.25);
-            margin-top: 30px; 
-            border-top: 1px solid rgba(255,255,255,0.03);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px; 
-        }
-
-        .footer a {
-            color: #3b82f6; 
-            text-decoration: none;
-            transition: opacity 0.3s ease, border-bottom 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        .footer a:hover {
-            opacity: 0.8;
-            border-bottom: 1px solid #3b82f6;
-        }
-
-        .footer-main {
-            font-size: 9px;
-            letter-spacing: 0.4em;
-        }
-
-        .footer-sub {
-            font-size: 7.5px;
-            letter-spacing: 0.35em;
-            opacity: 0.7;
-        }
-
-        /* --- VISOR FULLSCREEN (NIVEL 3) --- */
+        /* --- VISOR FULLSCREEN --- */
         #viewer {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: black;
-            z-index: 2000;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; inset: 0; background: black; z-index: 2000;
+            flex-direction: column; align-items: center; justify-content: center;
         }
-
-        #viewer img {
-            max-width: 100vw;
-            max-height: 100vh;
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-        }
-
-        .viewer-controls {
-            position: fixed;
-            top: 40px;
-            width: 100%;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 2100;
-            pointer-events: none;
-        }
-
-        .viewer-btn {
-            font-size: 10px;
-            letter-spacing: 0.3em;
-            text-transform: lowercase;
-            cursor: pointer;
-            color: rgba(255,255,255,0.5);
-            transition: color 0.3s;
-            pointer-events: auto;
-            background: rgba(0,0,0,0.2);
-            padding: 5px 10px;
-        }
+        #viewer img { max-width: 100vw; max-height: 100vh; object-fit: contain; }
+        .viewer-controls { position: fixed; top: 40px; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; z-index: 2100; pointer-events: none; }
+        .viewer-btn { font-size: 10px; letter-spacing: 0.3em; text-transform: lowercase; cursor: pointer; color: rgba(255,255,255,0.5); pointer-events: auto; }
         .viewer-btn:hover { color: white; }
 
-        .nav-btn {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 15%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 2050;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 40px;
-            font-weight: 100;
-        }
+        .nav-btn { position: absolute; top: 0; bottom: 0; width: 15%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2050; opacity: 0; transition: opacity 0.3s; font-size: 40px; }
         .nav-btn:hover { opacity: 1; background: linear-gradient(to var(--dir), rgba(0,0,0,0.5), transparent); }
         .prev-btn { left: 0; --dir: right; }
         .next-btn { right: 0; --dir: left; }
 
-        .counter {
-            position: fixed;
-            bottom: 40px;
-            font-size: 10px;
-            letter-spacing: 0.6em;
-            opacity: 0.3;
-        }
+        /* --- PIE DE PÁGINA --- */
+        .footer { padding: 80px 20px; text-align: center; font-weight: 200; text-transform: lowercase; color: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.03); }
+        .footer a { color: #3b82f6; text-decoration: none; }
 
         @media (max-width: 768px) {
-            .header { padding: 30px 15px; }
-            .logo { font-size: 1rem; }
-            .header-icon { width: 26px; height: 26px; }
             .row { flex-direction: column; height: auto; }
-            .photo-item { height: 55vh; }
-            .grid-container { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .nav-btn { width: 25%; opacity: 0.1; }
-            .viewer-controls { top: 20px; padding: 0 20px; }
-            .footer-main { font-size: 8px; }
-            .footer-sub { font-size: 7px; }
+            .photo-item { height: 45vh; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body oncontextmenu="return false;" ondragstart="return false;">
+<body>
 
     <header class="header">
-        <img src="logo inclinado negro.png" class="header-icon" alt="Logo Rodante" onclick="showHome()">
+        <img src="logo%20inclinado%20negro.png" class="header-icon" alt="Logo" onclick="showHome()">
         <div class="logo" onclick="showHome()">rodante</div>
     </header>
 
     <main>
         <section id="home-page" class="main-gallery">
-            <div class="row" style="height: 65vh;">
-                <div class="photo-item" onclick="openFolder('retratos')">
-                    <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="[imagen de retratos]">
-                    <div class="label">retratos</div>
+            <div class="row" style="height: 60vh;">
+                <div class="photo-item" onclick="openFolder('panoramicas')">
+                    <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas">
+                    <div class="label">panorámicas</div>
                 </div>
             </div>
+            
             <div class="row">
-                <div class="photo-item" onclick="openFolder('macros')">
-                    <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="[imagen de macros]">
-                    <div class="label">macros</div>
+                <div class="photo-item" onclick="openFolder('retratos')">
+                    <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos">
+                    <div class="label">retratos</div>
                 </div>
-                <div class="photo-item" onclick="openFolder('paisajes')">
-                    <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="[imagen de paisajes]">
-                    <div class="label">paisajes</div>
+                <div class="photo-item" onclick="openFolder('macros')">
+                    <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros">
+                    <div class="label">macros</div>
                 </div>
             </div>
         </section>
@@ -340,8 +206,7 @@
     </main>
 
     <footer class="footer">
-        <span class="footer-main">© 2026 rodante · todos los derechos reservados</span>
-        <span class="footer-sub">creación y diseño por <a href="https://rodante.es" target="_blank">rodante</a></span>
+        <div style="font-size: 9px; letter-spacing: 0.4em;">© 2026 rodante · archivo visual por <a href="https://rodante.es" target="_blank">rodante</a></div>
     </footer>
 
     <div id="viewer">
@@ -351,36 +216,34 @@
         </div>
         <div class="nav-btn prev-btn" onclick="changePhoto(-1)">‹</div>
         <div class="nav-btn next-btn" onclick="changePhoto(1)">›</div>
-        <img id="viewer-img" src="" alt="">
-        <div class="counter text-center"><span id="current-idx">1</span> / <span id="total-idx">1</span></div>
+        <img id="viewer-img" src="">
     </div>
 
     <script>
         const GALLERIES = {
+            panoramicas: [
+                "https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg",
+                "https://live.staticflickr.com/65535/48927874868_a2a4a12457_b.jpg",
+                "https://live.staticflickr.com/65535/48807744627_9cdb17a0e9_b.jpg",
+                "https://live.staticflickr.com/5516/11324887693_50c01627dc_b.jpg",
+                "https://live.staticflickr.com/65535/53352155968_fabb2f983c_b.jpg",
+                "https://live.staticflickr.com/4854/31932303167_c8edaa4ea0_b.jpg",
+                "https://live.staticflickr.com/7823/32998262948_9239dd45d6_b.jpg",
+                "https://live.staticflickr.com/4907/32998262538_d0cdcd33c6_b.jpg",
+                "https://live.staticflickr.com/4866/32998261958_31f81d651b_b.jpg",
+                "https://live.staticflickr.com/8877/17570982642_b74be2ab95_b.jpg",
+                "https://live.staticflickr.com/5316/14172388132_5c5b33d4d5_b.jpg",
+                "https://live.staticflickr.com/8246/8479454738_c03df0a782_b.jpg",
+                "https://live.staticflickr.com/8399/8606677981_7940ae5062_b.jpg",
+                "https://live.staticflickr.com/4046/4472556919_b485a2706e_b.jpg"
+            ],
             retratos: [
                 "https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg",
-                "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg",
-                "https://live.staticflickr.com/3004/2451484681_99203ea098_b.jpg",
-                "https://live.staticflickr.com/65535/52838568502_2a9be494af_b.jpg",
-                "https://live.staticflickr.com/65535/52858631615_0d891f59af_b.jpg",
-                "https://live.staticflickr.com/4089/4974819976_fe6ebed28d_b.jpg",
-                "https://live.staticflickr.com/3041/2470906563_807780a89a_b.jpg",
-                "https://live.staticflickr.com/2569/4039397686_9e42450769_b.jpg",
-                "https://live.staticflickr.com/65535/52890559297_7c0f74b02a_b.jpg",
-                "https://live.staticflickr.com/8653/16628204166_df9204e300_b.jpg",
-                "https://live.staticflickr.com/3075/2674106756_5bcd6bcf72_b.jpg",
-                "https://live.staticflickr.com/2648/4092163383_55962ba163_b.jpg",
-                "https://live.staticflickr.com/2940/14173943340_9efd53125e_b.jpg"
+                "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg"
             ],
             macros: [
                 "https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg",
-                "https://live.staticflickr.com/2382/2420606177_066aca122c_b.jpg",
-                "https://live.staticflickr.com/3193/2434531398_d07439347f_b.jpg",
-                "https://live.staticflickr.com/3121/2464264720_9ef862878f_b.jpg",
-                "https://live.staticflickr.com/3387/3314202010_0a47624a5e_b.jpg"
-            ],
-            paisajes: [
-                "https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg"
+                "https://live.staticflickr.com/2382/2420606177_066aca122c_b.jpg"
             ]
         };
 
@@ -392,7 +255,6 @@
             document.getElementById('folder-view').style.display = 'none';
             document.getElementById('viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
-            window.scrollTo(0,0);
         }
 
         function openFolder(id) {
@@ -425,27 +287,13 @@
 
         function updateViewerImage() {
             const img = document.getElementById('viewer-img');
-            img.style.opacity = '0';
-            setTimeout(() => {
-                img.src = currentActiveGallery[currentIndex];
-                document.getElementById('current-idx').innerText = currentIndex + 1;
-                document.getElementById('total-idx').innerText = currentActiveGallery.length;
-                img.onload = () => img.style.opacity = '1';
-            }, 100);
+            img.src = currentActiveGallery[currentIndex];
         }
 
         function changePhoto(step) {
             currentIndex = (currentIndex + step + currentActiveGallery.length) % currentActiveGallery.length;
             updateViewerImage();
         }
-
-        document.addEventListener('keydown', (e) => {
-            if (document.getElementById('viewer').style.display === 'flex') {
-                if (e.key === "Escape") closeViewer();
-                if (e.key === "ArrowRight") changePhoto(1);
-                if (e.key === "ArrowLeft") changePhoto(-1);
-            }
-        });
     </script>
 </body>
 </html>
