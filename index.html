@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <title>rodante | Archivo Visual</title>
     
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=8">
+    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=9">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -63,12 +63,12 @@
             margin-right: -1.2em; 
         }
 
-        /* --- GRID ASIMÉTRICO CATEGORÍAS --- */
+        /* --- GRID ASIMÉTRICO CATEGORÍAS (HOME) --- */
         .main-gallery {
             padding: 180px 15px 60px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: minmax(35vh, auto);
+            grid-auto-rows: minmax(30vh, auto);
             gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
@@ -87,15 +87,16 @@
             height: 100%;
             object-fit: cover;
             opacity: 0.6;
-            transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease;
+            transition: transform 2.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease;
         }
 
         .photo-item:hover img { opacity: 1; transform: scale(1.05); }
 
-        /* Asimetría Controlada para Categorías */
-        .cat-panoramicas { grid-column: span 2; height: 50vh; }
-        .cat-retratos { grid-row: span 1; }
-        .cat-macros { grid-row: span 1; }
+        /* Asimetría Controlada para 4 Categorías */
+        .cat-panoramicas { grid-column: span 2; height: 45vh; }
+        .cat-retratos { grid-column: span 1; height: 35vh; }
+        .cat-nocturnas { grid-column: span 1; height: 35vh; }
+        .cat-macros { grid-column: span 2; height: 30vh; }
 
         .label {
             position: absolute;
@@ -111,7 +112,7 @@
             z-index: 10;
         }
 
-        /* --- VISTA DE CARPETA MASONRY --- */
+        /* --- VISTA DE CARPETA MASONRY (INTERIOR) --- */
         #folder-view {
             display: none;
             padding: 200px 15px 80px;
@@ -171,8 +172,8 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .main-gallery { grid-template-columns: 1fr; grid-auto-rows: 40vh; }
-            .cat-panoramicas, .cat-retratos, .cat-macros { grid-column: span 1; height: 40vh; }
+            .main-gallery { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .cat-panoramicas, .cat-retratos, .cat-nocturnas, .cat-macros { grid-column: span 1; height: 40vh; }
             .masonry-container { columns: 2; }
         }
 
@@ -191,7 +192,7 @@
     </header>
 
     <main>
-        <!-- Home con SOLO las 3 categorías -->
+        <!-- Home con SOLO las 4 categorías -->
         <section id="home-page" class="main-gallery">
             <div class="photo-item cat-panoramicas" onclick="openFolder('panoramicas')">
                 <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas">
@@ -203,13 +204,18 @@
                 <div class="label">retratos</div>
             </div>
 
+            <div class="photo-item cat-nocturnas" onclick="openFolder('nocturnas')">
+                <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas">
+                <div class="label">nocturnas</div>
+            </div>
+
             <div class="photo-item cat-macros" onclick="openFolder('macros')">
                 <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros">
                 <div class="label">macros</div>
             </div>
         </section>
 
-        <!-- Vista de Carpeta con todas las fotos de la galería seleccionada -->
+        <!-- Vista de Carpeta con Masonry Asimétrico -->
         <section id="folder-view">
             <div class="back-btn" onclick="showHome()">[ volver al inicio ]</div>
             <div id="masonry-container" class="masonry-container"></div>
@@ -265,6 +271,21 @@
                 "https://live.staticflickr.com/3705/11354515085_b62e41b96f_b.jpg",
                 "https://live.staticflickr.com/2454/3671874644_03a46af8a1_b.jpg"
             ],
+            nocturnas: [
+                "https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg",
+                "https://live.staticflickr.com/65535/49229687873_84d7ce7bdc_b.jpg",
+                "https://live.staticflickr.com/4154/4968702353_5a241dce18_b.jpg",
+                "https://live.staticflickr.com/4102/4931251525_936a378b6a_b.jpg",
+                "https://live.staticflickr.com/4019/4230096685_b63cdb3eee_b.jpg",
+                "https://live.staticflickr.com/4120/4940550217_a9e495b5d0_b.jpg",
+                "https://live.staticflickr.com/4040/5154781630_266143af5c_b.jpg",
+                "https://live.staticflickr.com/4053/5166378119_dc40043f46_b.jpg",
+                "https://live.staticflickr.com/6084/6145248770_0edfbd76b2_b.jpg",
+                "https://live.staticflickr.com/3319/3186819847_b09b20354c_b.jpg",
+                "https://live.staticflickr.com/2573/3701168202_1a59e6fa34_b.jpg",
+                "https://live.staticflickr.com/3386/3566218504_ebd31e17f8_b.jpg",
+                "https://live.staticflickr.com/3375/3628957044_c4362f3cfa_b.jpg"
+            ],
             macros: [
                 "https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg",
                 "https://live.staticflickr.com/2382/2420606177_066aca122c_b.jpg"
@@ -291,7 +312,7 @@
                 const item = document.createElement('div');
                 item.className = 'masonry-item';
                 item.onclick = (e) => { e.stopPropagation(); openViewer(idx); };
-                item.innerHTML = `<img src="${url}" loading="lazy">`;
+                item.innerHTML = `<img src="${url}" loading="lazy" alt="Archivo rodante">`;
                 container.appendChild(item);
             });
 
