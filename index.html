@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>rodante | Archivo Visual</title>
     
-    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=3">
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=7">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&family=Libre+Baskerville:ital@1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap');
         
         :root { --bg: #030303; }
         
@@ -21,9 +22,6 @@
             overflow-x: hidden;
             -webkit-user-select: none;
             user-select: none;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         /* --- CABECERA --- */
@@ -32,190 +30,212 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 45px 30px;
+            padding: 40px 30px;
             text-align: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+            background: linear-gradient(to bottom, var(--bg) 50%, transparent);
             pointer-events: none;
+        }
+
+        .header-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            pointer-events: auto;
         }
 
         .header-icon {
-            width: 32px; 
-            height: 32px;
+            width: 28px; 
+            height: 28px;
             filter: invert(1); 
-            opacity: 0.9;
-            pointer-events: auto;
+            opacity: 0.8;
             cursor: pointer;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
-        .header-icon:hover { opacity: 0.6; }
 
         .logo {
             font-weight: 100;
             letter-spacing: 1.2em;
             text-transform: lowercase;
-            font-size: 1.1rem;
-            pointer-events: auto;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: opacity 0.3s ease;
             margin-right: -1.2em; 
         }
-        .logo:hover { opacity: 0.6; }
 
-        /* --- CONTENIDO PRINCIPAL --- */
-        main { flex: 1; }
-
+        /* --- GRID ASIMÉTRICO PRINCIPAL --- */
         .main-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 1vh;
-            padding: 1vh;
-            margin-top: 140px; 
-            transition: opacity 0.5s ease;
+            padding: 160px 10px 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 22vh;
+            gap: 12px;
+            max-width: 1800px;
+            margin: 0 auto;
         }
-
-        .row { display: flex; gap: 1vh; height: 45vh; }
 
         .photo-item {
             position: relative;
-            flex: 1;
             overflow: hidden;
             cursor: pointer;
             background: #0a0a0a;
-            transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            border-radius: 2px;
         }
-
-        @media (min-width: 1024px) { .photo-item:hover { flex: 2; } }
 
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6;
-            transition: transform 1.2s ease, opacity 0.6s ease;
+            opacity: 0.7;
+            transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease;
         }
 
-        .photo-item:hover img { opacity: 1; transform: scale(1.05); }
+        .photo-item:hover img { opacity: 1; transform: scale(1.08); }
+
+        /* Clases para asimetría en Home */
+        .span-v-2 { grid-row: span 2; }
+        .span-h-2 { grid-column: span 2; }
+        .span-full { grid-column: span 2; grid-row: span 2; }
 
         .label {
             position: absolute;
-            bottom: 25px;
-            left: 25px;
-            font-size: 10px;
-            letter-spacing: 0.4em;
+            bottom: 20px;
+            left: 20px;
+            font-size: 9px;
+            letter-spacing: 0.3em;
             text-transform: lowercase;
-            padding: 6px 12px;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(8px);
-            border-left: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 14px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255,255,255,0.5);
+            z-index: 10;
         }
 
-        /* --- VISTA DE CARPETA --- */
+        /* --- VISTA DE CARPETA MASONRY (TODAS LAS GALERÍAS) --- */
         #folder-view {
             display: none;
-            padding: 200px 20px 40px;
-            min-height: 100vh;
-            animation: slideIn 0.5s ease;
+            padding: 180px 15px 60px;
+            animation: fadeIn 1s ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 15px;
+        .masonry-container {
+            columns: 3 350px;
+            column-gap: 15px;
             max-width: 1600px;
             margin: 0 auto;
         }
 
-        .grid-item { aspect-ratio: 16/9; overflow: hidden; cursor: pointer; background: #0d0d0d; }
-        .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease, opacity 0.4s ease; opacity: 0.7; }
-        .grid-item:hover img { transform: scale(1.08); opacity: 1; }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            background: #0d0d0d;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            opacity: 0.8;
+            transition: opacity 0.5s, transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .masonry-item:hover img { opacity: 1; transform: scale(1.04); }
 
         .back-btn {
-            display: block; margin: 0 auto 50px; font-size: 10px; letter-spacing: 0.4em;
-            text-transform: lowercase; color: rgba(255,255,255,0.4); cursor: pointer; text-align: center; width: fit-content;
+            display: block; 
+            margin: 0 auto 50px; 
+            font-size: 10px; 
+            letter-spacing: 0.5em;
+            text-transform: lowercase; 
+            color: rgba(255,255,255,0.4); 
+            cursor: pointer; 
+            text-align: center;
+            transition: color 0.3s;
         }
         .back-btn:hover { color: white; }
 
-        /* --- VISOR FULLSCREEN --- */
+        /* --- VISOR --- */
         #viewer {
-            display: none; position: fixed; inset: 0; background: black; z-index: 2000;
-            flex-direction: column; align-items: center; justify-content: center;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(15px);
         }
-        #viewer img { max-width: 100vw; max-height: 100vh; object-fit: contain; }
-        .viewer-controls { position: fixed; top: 40px; width: 100%; padding: 0 40px; display: flex; justify-content: space-between; z-index: 2100; pointer-events: none; }
-        .viewer-btn { font-size: 10px; letter-spacing: 0.3em; text-transform: lowercase; cursor: pointer; color: rgba(255,255,255,0.5); pointer-events: auto; }
-        .viewer-btn:hover { color: white; }
+        #viewer img { max-width: 90vw; max-height: 85vh; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .viewer-close { position: absolute; top: 40px; right: 40px; font-size: 10px; letter-spacing: 0.3em; cursor: pointer; opacity: 0.6; padding: 10px; }
+        .viewer-close:hover { opacity: 1; }
+        
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); padding: 50px; cursor: pointer; font-size: 40px; font-weight: 100; opacity: 0; transition: opacity 0.3s; color: white; }
+        #viewer:hover .nav-btn { opacity: 0.3; }
+        .nav-btn:hover { opacity: 1 !important; }
 
-        .nav-btn { position: absolute; top: 0; bottom: 0; width: 15%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2050; opacity: 0; transition: opacity 0.3s; font-size: 40px; }
-        .nav-btn:hover { opacity: 1; background: linear-gradient(to var(--dir), rgba(0,0,0,0.5), transparent); }
-        .prev-btn { left: 0; --dir: right; }
-        .next-btn { right: 0; --dir: left; }
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .main-gallery { grid-template-columns: repeat(2, 1fr); }
+            .span-full { grid-column: span 2; }
+            .masonry-container { columns: 2; }
+        }
 
-        /* --- PIE DE PÁGINA --- */
-        .footer { padding: 80px 20px; text-align: center; font-weight: 200; text-transform: lowercase; color: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.03); }
-        .footer a { color: #3b82f6; text-decoration: none; }
-
-        @media (max-width: 768px) {
-            .row { flex-direction: column; height: auto; }
-            .photo-item { height: 45vh; }
-            .grid-container { grid-template-columns: 1fr; }
+        @media (max-width: 640px) {
+            .main-gallery { grid-template-columns: 1fr; grid-auto-rows: 35vh; }
+            .span-v-2, .span-h-2, .span-full { grid-column: span 1; grid-row: span 1; }
+            .masonry-container { columns: 1; }
+            .nav-btn { display: none; } /* En móvil mejor swipe o cerrar */
         }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <img src="logo%20inclinado%20negro.png" class="header-icon" alt="Logo" onclick="showHome()">
-        <div class="logo" onclick="showHome()">rodante</div>
+        <div class="header-content">
+            <img src="logo%20inclinado%20negro.png" class="header-icon" alt="Logo" onclick="showHome()">
+            <div class="logo" onclick="showHome()">rodante</div>
+        </div>
     </header>
 
     <main>
+        <!-- Galería Principal Asimétrica -->
         <section id="home-page" class="main-gallery">
-            <div class="row" style="height: 60vh;">
-                <div class="photo-item" onclick="openFolder('panoramicas')">
-                    <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas">
-                    <div class="label">panorámicas</div>
-                </div>
+            <!-- Portada Dinámica -->
+            <div class="photo-item span-full" onclick="openFolder('panoramicas')">
+                <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas">
+                <div class="label">panorámicas</div>
             </div>
             
-            <div class="row">
-                <div class="photo-item" onclick="openFolder('retratos')">
-                    <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos">
-                    <div class="label">retratos</div>
-                </div>
-                <div class="photo-item" onclick="openFolder('macros')">
-                    <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros">
-                    <div class="label">macros</div>
-                </div>
+            <div class="photo-item span-v-2" onclick="openFolder('retratos')">
+                <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos">
+                <div class="label">retratos</div>
+            </div>
+
+            <div class="photo-item" onclick="openFolder('macros')">
+                <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros">
+                <div class="label">macros</div>
+            </div>
+
+            <div class="photo-item" onclick="openFolder('retratos')">
+                <img src="https://live.staticflickr.com/8174/7988106553_5d46562d61_b.jpg" alt="Detalle">
+            </div>
+
+            <div class="photo-item span-h-2" onclick="openFolder('panoramicas')">
+                <img src="https://live.staticflickr.com/65535/53352155968_fabb2f983c_b.jpg" alt="Panorámica Secundaria">
             </div>
         </section>
 
+        <!-- Vista de Carpeta Masonry Adaptable -->
         <section id="folder-view">
-            <div class="back-btn" onclick="showHome()">← volver al inicio</div>
-            <div id="grid-container" class="grid-container"></div>
+            <div class="back-btn" onclick="showHome()">[ volver al inicio ]</div>
+            <div id="masonry-container" class="masonry-container"></div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div style="font-size: 9px; letter-spacing: 0.4em;">© 2026 rodante · archivo visual por <a href="https://rodante.es" target="_blank">rodante</a></div>
-    </footer>
-
-    <div id="viewer">
-        <div class="viewer-controls">
-            <div class="viewer-btn" onclick="showHome()">inicio</div>
-            <div class="viewer-btn" onclick="closeViewer()">cerrar</div>
-        </div>
-        <div class="nav-btn prev-btn" onclick="changePhoto(-1)">‹</div>
-        <div class="nav-btn next-btn" onclick="changePhoto(1)">›</div>
+    <div id="viewer" onclick="closeViewer()">
+        <div class="viewer-close">ESC / CERRAR</div>
+        <div class="nav-btn" style="left:0" onclick="event.stopPropagation(); changePhoto(-1)">‹</div>
+        <div class="nav-btn" style="right:0" onclick="event.stopPropagation(); changePhoto(1)">›</div>
         <img id="viewer-img" src="">
     </div>
 
@@ -239,7 +259,27 @@
             ],
             retratos: [
                 "https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg",
-                "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg"
+                "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg",
+                "https://live.staticflickr.com/3004/2451484681_99203ea098_b.jpg",
+                "https://live.staticflickr.com/8174/7988106553_5d46562d61_b.jpg",
+                "https://live.staticflickr.com/65535/52838568502_2a9be494af_b.jpg",
+                "https://live.staticflickr.com/65535/52858631615_0d891f59af_b.jpg",
+                "https://live.staticflickr.com/4089/4974819976_fe6ebed28d_b.jpg",
+                "https://live.staticflickr.com/3041/2470906563_807780a89a_b.jpg",
+                "https://live.staticflickr.com/2569/4039397686_9e42450769_b.jpg",
+                "https://live.staticflickr.com/65535/52890559297_7c0f74b02a_b.jpg",
+                "https://live.staticflickr.com/8653/16628204166_df9204e300_b.jpg",
+                "https://live.staticflickr.com/3075/2674106756_5bcd6bcf72_b.jpg",
+                "https://live.staticflickr.com/2648/4092163383_55962ba163_b.jpg",
+                "https://live.staticflickr.com/2940/14173943340_9efd53125e_b.jpg",
+                "https://live.staticflickr.com/5518/11665162033_6263295026_b.jpg",
+                "https://live.staticflickr.com/2492/3761185143_c247bd897a_b.jpg",
+                "https://live.staticflickr.com/2014/5787212615_fe57b5e781_b.jpg",
+                "https://live.staticflickr.com/3005/2364100184_172f56af36_b.jpg",
+                "https://live.staticflickr.com/3281/2821723518_54a5f4b2e9_b.jpg",
+                "https://live.staticflickr.com/2640/3859153972_cf9c20e1aa_b.jpg",
+                "https://live.staticflickr.com/3705/11354515085_b62e41b96f_b.jpg",
+                "https://live.staticflickr.com/2454/3671874644_03a46af8a1_b.jpg"
             ],
             macros: [
                 "https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg",
@@ -251,23 +291,26 @@
         let currentIndex = 0;
 
         function showHome() {
-            document.getElementById('home-page').style.display = 'flex';
+            document.getElementById('home-page').style.display = 'grid';
             document.getElementById('folder-view').style.display = 'none';
             document.getElementById('viewer').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            window.scrollTo(0,0);
         }
 
         function openFolder(id) {
             currentActiveGallery = GALLERIES[id];
-            const container = document.getElementById('grid-container');
+            const container = document.getElementById('masonry-container');
             container.innerHTML = '';
+            
+            // Generar los elementos del mosaico
             currentActiveGallery.forEach((url, idx) => {
                 const item = document.createElement('div');
-                item.className = 'grid-item';
-                item.onclick = () => openViewer(idx);
-                item.innerHTML = `<img src="${url}" loading="lazy">`;
+                item.className = 'masonry-item';
+                item.onclick = (e) => { e.stopPropagation(); openViewer(idx); };
+                item.innerHTML = `<img src="${url}" loading="lazy" alt="Archivo rodante">`;
                 container.appendChild(item);
             });
+
             document.getElementById('home-page').style.display = 'none';
             document.getElementById('folder-view').style.display = 'block';
             window.scrollTo(0,0);
@@ -275,25 +318,29 @@
 
         function openViewer(index) {
             currentIndex = index;
-            updateViewerImage();
+            document.getElementById('viewer-img').src = currentActiveGallery[currentIndex];
             document.getElementById('viewer').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
         function closeViewer() {
             document.getElementById('viewer').style.display = 'none';
-            if (document.getElementById('folder-view').style.display === 'block') document.body.style.overflow = 'auto';
-        }
-
-        function updateViewerImage() {
-            const img = document.getElementById('viewer-img');
-            img.src = currentActiveGallery[currentIndex];
+            document.body.style.overflow = 'auto';
         }
 
         function changePhoto(step) {
             currentIndex = (currentIndex + step + currentActiveGallery.length) % currentActiveGallery.length;
-            updateViewerImage();
+            document.getElementById('viewer-img').src = currentActiveGallery[currentIndex];
         }
+
+        // Navegación por teclado
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('viewer').style.display === 'flex') {
+                if (e.key === 'ArrowRight') changePhoto(1);
+                if (e.key === 'ArrowLeft') changePhoto(-1);
+                if (e.key === 'Escape') closeViewer();
+            }
+        });
     </script>
 </body>
 </html>
