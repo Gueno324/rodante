@@ -6,7 +6,7 @@
     <title>rodante | Archivo Visual</title>
     
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=9">
+    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=14">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -24,53 +24,94 @@
             user-select: none;
         }
 
-        /* --- CABECERA --- */
-        .header {
+        /* --- ELEMENTOS FIJOS --- */
+        .fixed-layer {
             position: fixed;
-            top: 0;
             left: 0;
             width: 100%;
-            padding: 50px 30px;
-            text-align: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, var(--bg) 40%, transparent);
             pointer-events: none;
+            transition: opacity 0.5s ease;
         }
 
-        .header-content {
+        .header {
+            top: 0;
+            padding: 40px 30px;
+            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+        }
+
+        .footer {
+            bottom: 0;
+            padding: 20px 30px;
+            background: linear-gradient(to top, var(--bg) 60%, transparent);
+        }
+
+        .layer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 6px;
             pointer-events: auto;
         }
 
+        /* --- LOGOTIPO --- */
         .header-icon {
-            width: 30px; 
-            height: 30px;
+            width: 26px; 
+            height: 26px;
             filter: invert(1); 
-            opacity: 0.8;
+            opacity: 0.5;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: opacity 0.5s;
         }
+        .header-icon:hover { opacity: 1; }
 
-        .logo {
+        .logo-text {
             font-weight: 100;
             letter-spacing: 1.2em;
             text-transform: lowercase;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            margin-right: -1.2em; 
+            margin-right: -1.2em;
+            opacity: 0.6;
         }
 
-        /* --- GRID ASIMÉTRICO CATEGORÍAS (HOME) --- */
+        /* --- FOOTER REFINADO --- */
+        .footer-text {
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.35);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .credit-text {
+            display: block;
+            font-size: 7.5px; /* Texto más pequeño para el diseño */
+            opacity: 0.6;
+            margin-top: 2px;
+            text-transform: lowercase;
+            letter-spacing: 0.1em;
+        }
+
+        .blue-link {
+            color: #3b82f6; 
+            text-decoration: none;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        .blue-link:hover { opacity: 1; text-decoration: underline; }
+
+        /* --- CONTENIDO --- */
+        main { padding-bottom: 120px; }
+
         .main-gallery {
-            padding: 180px 15px 60px;
+            padding: 160px 15px 40px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: minmax(30vh, auto);
-            gap: 15px;
-            max-width: 1400px;
+            grid-auto-rows: minmax(25vh, auto);
+            gap: 12px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -78,158 +119,168 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            background: #0a0a0a;
-            border-radius: 2px;
+            background: #050505;
         }
 
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6;
-            transition: transform 2.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease;
+            opacity: 0.4;
+            transition: transform 4s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.2s ease;
         }
 
-        .photo-item:hover img { opacity: 1; transform: scale(1.05); }
+        .photo-item:hover img { opacity: 0.85; transform: scale(1.02); }
 
-        /* Asimetría Controlada para 4 Categorías */
-        .cat-panoramicas { grid-column: span 2; height: 45vh; }
+        .cat-panoramicas { grid-column: span 2; height: 40vh; }
         .cat-retratos { grid-column: span 1; height: 35vh; }
         .cat-nocturnas { grid-column: span 1; height: 35vh; }
-        .cat-macros { grid-column: span 2; height: 30vh; }
+        .cat-macros { grid-column: span 2; height: 25vh; }
 
         .label {
             position: absolute;
-            bottom: 30px;
-            left: 30px;
-            font-size: 10px;
-            letter-spacing: 0.4em;
+            bottom: 25px;
+            left: 25px;
+            font-size: 9px;
+            font-weight: 200;
+            letter-spacing: 0.5em;
             text-transform: lowercase;
-            padding: 8px 16px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
-            border-left: 1px solid rgba(255,255,255,0.5);
-            z-index: 10;
+            padding: 6px 14px;
+            color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(5px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* --- VISTA DE CARPETA MASONRY (INTERIOR) --- */
+        /* --- FOLDER VIEW --- */
         #folder-view {
             display: none;
-            padding: 200px 15px 80px;
-            animation: fadeIn 1.2s ease;
+            padding: 160px 20px 180px;
+            animation: fadeIn 1.5s ease;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .masonry-container {
-            columns: 3 350px;
-            column-gap: 20px;
-            max-width: 1600px;
+            columns: 3 300px;
+            column-gap: 15px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .masonry-item {
             break-inside: avoid;
-            margin-bottom: 20px;
-            background: #0d0d0d;
+            margin-bottom: 15px;
+            background: #080808;
             cursor: pointer;
-            overflow: hidden;
-            border-radius: 2px;
         }
 
         .masonry-item img {
             width: 100%;
             display: block;
-            opacity: 0.8;
-            transition: opacity 0.5s, transform 0.8s ease;
+            opacity: 0.75;
+            transition: opacity 0.8s ease;
         }
 
-        .masonry-item:hover img { opacity: 1; transform: scale(1.03); }
-
         .back-btn {
-            display: block; 
-            margin: 0 auto 60px; 
-            font-size: 10px; 
+            font-size: 8px; 
             letter-spacing: 0.5em;
             text-transform: lowercase; 
             color: rgba(255,255,255,0.4); 
-            cursor: pointer; 
-            text-align: center;
+            cursor: pointer;
+            margin-bottom: 12px;
         }
-        .back-btn:hover { color: white; }
 
         /* --- VISOR --- */
         #viewer {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.99); z-index: 2000;
             align-items: center; justify-content: center;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
         }
         #viewer img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
-        .viewer-close { position: absolute; top: 40px; right: 40px; font-size: 10px; letter-spacing: 0.3em; cursor: pointer; opacity: 0.6; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); padding: 60px; cursor: pointer; font-size: 40px; font-weight: 100; opacity: 0; transition: opacity 0.3s; color: white; }
-        #viewer:hover .nav-btn { opacity: 0.3; }
-        .nav-btn:hover { opacity: 1 !important; }
+        .viewer-close { position: absolute; top: 30px; right: 30px; font-size: 9px; letter-spacing: 0.4em; cursor: pointer; opacity: 0.4; }
+        
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); padding: 40px; cursor: pointer; font-size: 30px; font-weight: 100; opacity: 0; transition: opacity 0.3s; color: white; }
+        #viewer:hover .nav-btn { opacity: 0.2; }
+        .nav-btn:hover { opacity: 0.9 !important; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .main-gallery { grid-template-columns: 1fr; grid-auto-rows: auto; }
-            .cat-panoramicas, .cat-retratos, .cat-nocturnas, .cat-macros { grid-column: span 1; height: 40vh; }
+            .header, .footer { padding: 20px 20px; }
+            .main-gallery { padding: 130px 10px 40px; grid-template-columns: 1fr; }
+            .cat-panoramicas, .cat-retratos, .cat-nocturnas, .cat-macros { grid-column: span 1; height: 30vh; }
             .masonry-container { columns: 2; }
+            .footer-text { font-size: 8px; }
+            .credit-text { font-size: 7px; }
         }
 
         @media (max-width: 480px) {
             .masonry-container { columns: 1; }
+            .nav-btn { display: none; }
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
-    <header class="header">
-        <div class="header-content">
-            <img src="logo%20inclinado%20negro.png" class="header-icon" alt="Logo" onclick="showHome()">
-            <div class="logo" onclick="showHome()">rodante</div>
+    <header class="fixed-layer header">
+        <div class="layer-content">
+            <img src="logo%20inclinado%20negro.png" class="header-icon" alt="Logo rodante" onclick="showHome()">
+            <div class="logo-text" onclick="showHome()">rodante</div>
         </div>
     </header>
 
     <main>
-        <!-- Home con SOLO las 4 categorías -->
         <section id="home-page" class="main-gallery">
             <div class="photo-item cat-panoramicas" onclick="openFolder('panoramicas')">
-                <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas">
+                <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas" draggable="false">
                 <div class="label">panorámicas</div>
             </div>
             
             <div class="photo-item cat-retratos" onclick="openFolder('retratos')">
-                <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos">
+                <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos" draggable="false">
                 <div class="label">retratos</div>
             </div>
 
             <div class="photo-item cat-nocturnas" onclick="openFolder('nocturnas')">
-                <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas">
+                <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas" draggable="false">
                 <div class="label">nocturnas</div>
             </div>
 
             <div class="photo-item cat-macros" onclick="openFolder('macros')">
-                <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros">
+                <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros" draggable="false">
                 <div class="label">macros</div>
             </div>
         </section>
 
-        <!-- Vista de Carpeta con Masonry Asimétrico -->
         <section id="folder-view">
-            <div class="back-btn" onclick="showHome()">[ volver al inicio ]</div>
             <div id="masonry-container" class="masonry-container"></div>
         </section>
     </main>
+
+    <footer class="fixed-layer footer">
+        <div class="layer-content">
+            <div id="back-nav" style="display: none;">
+                <div class="back-btn" onclick="showHome()">[ volver al inicio ]</div>
+            </div>
+            <div class="footer-text">
+                © <span id="year"></span> rodante — todos los derechos reservados
+                <span class="credit-text">
+                    creación y diseño de <span class="blue-link" onclick="showHome()">rodante</span>
+                </span>
+            </div>
+        </div>
+    </footer>
 
     <div id="viewer" onclick="closeViewer()">
         <div class="viewer-close">CERRAR</div>
         <div class="nav-btn" style="left:0" onclick="event.stopPropagation(); changePhoto(-1)">‹</div>
         <div class="nav-btn" style="right:0" onclick="event.stopPropagation(); changePhoto(1)">›</div>
-        <img id="viewer-img" src="">
+        <img id="viewer-img" src="" draggable="false" oncontextmenu="return false;">
     </div>
 
     <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
         const GALLERIES = {
             panoramicas: [
                 "https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg",
@@ -298,6 +349,7 @@
         function showHome() {
             document.getElementById('home-page').style.display = 'grid';
             document.getElementById('folder-view').style.display = 'none';
+            document.getElementById('back-nav').style.display = 'none';
             document.getElementById('viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
             window.scrollTo(0,0);
@@ -312,12 +364,13 @@
                 const item = document.createElement('div');
                 item.className = 'masonry-item';
                 item.onclick = (e) => { e.stopPropagation(); openViewer(idx); };
-                item.innerHTML = `<img src="${url}" loading="lazy" alt="Archivo rodante">`;
+                item.innerHTML = `<img src="${url}" loading="lazy" draggable="false" oncontextmenu="return false;">`;
                 container.appendChild(item);
             });
 
             document.getElementById('home-page').style.display = 'none';
             document.getElementById('folder-view').style.display = 'block';
+            document.getElementById('back-nav').style.display = 'block';
             window.scrollTo(0,0);
         }
 
@@ -326,11 +379,15 @@
             document.getElementById('viewer-img').src = currentActiveGallery[currentIndex];
             document.getElementById('viewer').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            document.querySelector('.header').style.opacity = '0';
+            document.querySelector('.footer').style.opacity = '0';
         }
 
         function closeViewer() {
             document.getElementById('viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
+            document.querySelector('.header').style.opacity = '1';
+            document.querySelector('.footer').style.opacity = '1';
         }
 
         function changePhoto(step) {
