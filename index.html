@@ -24,7 +24,7 @@
             user-select: none;
         }
 
-        /* --- ESTRUCTURA FIJA (NO TOCAR) --- */
+        /* --- ESTRUCTURA FIJA --- */
         .fixed-layer {
             position: fixed;
             left: 0;
@@ -130,7 +130,6 @@
 
         .photo-item:hover img { opacity: 0.85; transform: scale(1.02); }
 
-        /* Layout de categorías */
         .cat-xl { grid-column: span 2; height: 40vh; }
         .cat-lg { grid-column: span 1; height: 35vh; }
         .cat-md { grid-column: span 1; height: 25vh; }
@@ -221,51 +220,43 @@
 
     <main>
         <section id="home-page" class="main-gallery">
-            <!-- Panorámicas -->
             <div class="photo-item cat-xl" onclick="openFolder('panoramicas')">
-                <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas" draggable="false">
+                <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas">
                 <div class="label">panorámicas</div>
             </div>
             
-            <!-- Retratos -->
             <div class="photo-item cat-lg" onclick="openFolder('retratos')">
-                <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos" draggable="false">
+                <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos">
                 <div class="label">retratos</div>
             </div>
 
-            <!-- Nocturnas -->
             <div class="photo-item cat-lg" onclick="openFolder('nocturnas')">
-                <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas" draggable="false">
+                <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas">
                 <div class="label">nocturnas</div>
             </div>
 
-            <!-- Mini Hollywood -->
             <div class="photo-item cat-xl" onclick="openFolder('hollywood')">
-                <img src="https://live.staticflickr.com/1073/5120019577_a5f1a90897_b.jpg" alt="Mini Hollywood" draggable="false">
+                <img src="https://live.staticflickr.com/1073/5120019577_a5f1a90897_b.jpg" alt="Mini Hollywood">
                 <div class="label">mini hollywood</div>
             </div>
 
-            <!-- Deportes -->
             <div class="photo-item cat-lg" onclick="openFolder('deportes')">
-                <img src="https://live.staticflickr.com/65535/52703815338_eedfa7a171_b.jpg" alt="Deportes" draggable="false">
+                <img src="https://live.staticflickr.com/65535/52703815338_eedfa7a171_b.jpg" alt="Deportes">
                 <div class="label">deportes</div>
             </div>
 
-            <!-- Blanco y Negro -->
             <div class="photo-item cat-lg" onclick="openFolder('bn')">
-                <img src="https://images.unsplash.com/photo-1470124114660-23b044d0ecfb?q=80&w=2070&auto=format&fit=crop" alt="Blanco y Negro" draggable="false">
+                <img src="https://images.unsplash.com/photo-1470124114660-23b044d0ecfb?q=80&w=2070&auto=format&fit=crop" alt="Blanco y Negro">
                 <div class="label">blanco y negro</div>
             </div>
 
-            <!-- Naturaleza (ACTUALIZADA) -->
             <div class="photo-item cat-md" onclick="openFolder('naturaleza')">
-                <img src="https://live.staticflickr.com/2326/2345296962_a97217acb6_b.jpg" alt="Naturaleza" draggable="false">
+                <img src="https://live.staticflickr.com/2326/2345296962_a97217acb6_b.jpg" alt="Naturaleza">
                 <div class="label">naturaleza</div>
             </div>
 
-            <!-- Macros -->
             <div class="photo-item cat-md" onclick="openFolder('macros')">
-                <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros" draggable="false">
+                <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros">
                 <div class="label">macros</div>
             </div>
         </section>
@@ -293,7 +284,7 @@
         <div class="viewer-close">CERRAR</div>
         <div class="nav-btn" style="left:0" onclick="event.stopPropagation(); changePhoto(-1)">‹</div>
         <div class="nav-btn" style="right:0" onclick="event.stopPropagation(); changePhoto(1)">›</div>
-        <img id="viewer-img" src="" draggable="false">
+        <img id="viewer-img" src="">
     </div>
 
     <script>
@@ -301,20 +292,37 @@
 
         const GALLERIES = {
             panoramicas: [
-                "https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg",
                 "https://live.staticflickr.com/65535/48927874868_a2a4a12457_b.jpg",
-                "https://live.staticflickr.com/65535/48807744627_9cdb17a0e9_b.jpg",
-                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop"
+                "https://live.staticflickr.com/65535/48807744627_9cdb17a0e9_b.jpg"
             ],
             retratos: [
                 "https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg",
+                "https://live.staticflickr.com/65535/52867389660_1047c99b76_b.jpg",
                 "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg",
-                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop"
+                "https://live.staticflickr.com/3004/2451484681_99203ea098_b.jpg",
+                "https://live.staticflickr.com/8174/7988106553_5d46562d61_b.jpg",
+                "https://live.staticflickr.com/65535/52838568502_2a9be494af_b.jpg",
+                "https://live.staticflickr.com/65535/52858631615_0d891f59af_b.jpg",
+                "https://live.staticflickr.com/4089/4974819976_fe6ebed28d_b.jpg",
+                "https://live.staticflickr.com/3041/2470906563_807780a89a_b.jpg",
+                "https://live.staticflickr.com/2569/4039397686_9e42450769_b.jpg",
+                "https://live.staticflickr.com/65535/52890559297_7c0f74b02a_b.jpg",
+                "https://live.staticflickr.com/8653/16628204166_df9204e300_b.jpg",
+                "https://live.staticflickr.com/3075/2674106756_5bcd6bcf72_b.jpg",
+                "https://live.staticflickr.com/2648/4092163383_55962ba163_b.jpg",
+                "https://live.staticflickr.com/2940/14173943340_9efd53125e_b.jpg",
+                "https://live.staticflickr.com/5518/11665162033_6263295026_b.jpg",
+                "https://live.staticflickr.com/2492/3761185143_c247bd897a_b.jpg",
+                "https://live.staticflickr.com/2014/5787212615_fe57b5e781_b.jpg",
+                "https://live.staticflickr.com/3005/2364100184_172f56af36_b.jpg",
+                "https://live.staticflickr.com/3281/2821723518_54a5f4b2e9_b.jpg",
+                "https://live.staticflickr.com/2640/3859153972_cf9c20e1aa_b.jpg",
+                "https://live.staticflickr.com/3705/11354515085_b62e41b96f_b.jpg",
+                "https://live.staticflickr.com/2454/3671874644_03a46af8a1_b.jpg"
             ],
             nocturnas: [
                 "https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg",
-                "https://live.staticflickr.com/65535/49229687873_84d7ce7bdc_b.jpg",
-                "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop"
+                "https://live.staticflickr.com/65535/49229687873_84d7ce7bdc_b.jpg"
             ],
             hollywood: [
                 "https://live.staticflickr.com/1073/5120019577_a5f1a90897_b.jpg",
@@ -339,12 +347,11 @@
                 "https://live.staticflickr.com/2367/2267953533_5e3e7d3157_b.jpg"
             ],
             bn: [
-                "https://images.unsplash.com/photo-1470124114660-23b044d0ecfb?q=80&w=2070&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?q=80&w=2070&auto=format&fit=crop"
+                "https://images.unsplash.com/photo-1470124114660-23b044d0ecfb?q=80&w=2070&auto=format&fit=crop"
             ],
             naturaleza: [
-                "https://live.staticflickr.com/7650/16754653431_7a1503b807_b.jpg",
                 "https://live.staticflickr.com/2326/2345296962_a97217acb6_b.jpg",
+                "https://live.staticflickr.com/7650/16754653431_7a1503b807_b.jpg",
                 "https://live.staticflickr.com/8868/18278700708_8394b69704_b.jpg",
                 "https://live.staticflickr.com/2341/2264390853_b6fd799e75_b.jpg",
                 "https://live.staticflickr.com/2026/2343710716_7748742aee_b.jpg",
@@ -355,12 +362,7 @@
                 "https://live.staticflickr.com/3351/5716163996_97466d3171_b.jpg",
                 "https://live.staticflickr.com/2369/5733703146_c3bd6ca718_b.jpg",
                 "https://live.staticflickr.com/3271/2804839401_3d818e4812_b.jpg",
-                "https://live.staticflickr.com/3073/3067065257_4ed169b6ea_b.jpg",
-                "https://live.staticflickr.com/3220/2809887821_80b344c4e8_b.jpg",
-                "https://live.staticflickr.com/2368/2250393234_3b68c8f2dd_b.jpg",
-                "https://live.staticflickr.com/65535/53326487427_c1a97fc7ff_b.jpg",
-                "https://live.staticflickr.com/65535/53336904645_d6179097f9_b.jpg"
-                
+                "https://live.staticflickr.com/3073/3067065257_4ed169b6ea_b.jpg"
             ],
             macros: [
                 "https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg",
@@ -369,8 +371,7 @@
                 "https://live.staticflickr.com/3121/2464264720_9ef862878f_b.jpg",
                 "https://live.staticflickr.com/3387/3314202010_0a47624a5e_b.jpg",
                 "https://live.staticflickr.com/3204/2448396549_6cdb515e47_b.jpg",
-                "https://live.staticflickr.com/3354/3638682340_a93aa9cb2a_b.jpg",
-                "https://live.staticflickr.com/3153/2791599309_dcb14890a9_b.jpg"
+                "https://live.staticflickr.com/3354/3638682340_a93aa9cb2a_b.jpg"
             ]
         };
 
@@ -434,3 +435,4 @@
     </script>
 </body>
 </html>
+   
