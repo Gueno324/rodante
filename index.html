@@ -6,7 +6,7 @@
     <title>rodante | Archivo Visual</title>
     
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=14">
+    <link rel="icon" type="image/png" href="logo%20inclinado%20negro.png?v=15">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -24,14 +24,14 @@
             user-select: none;
         }
 
-        /* --- ELEMENTOS FIJOS --- */
+        /* --- ESTRUCTURA FIJA (NO TOCAR) --- */
         .fixed-layer {
             position: fixed;
             left: 0;
             width: 100%;
             z-index: 1000;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            opacity: 1; 
         }
 
         .header {
@@ -54,7 +54,6 @@
             pointer-events: auto;
         }
 
-        /* --- LOGOTIPO --- */
         .header-icon {
             width: 26px; 
             height: 26px;
@@ -75,7 +74,6 @@
             opacity: 0.6;
         }
 
-        /* --- FOOTER REFINADO --- */
         .footer-text {
             font-size: 9px;
             font-weight: 300;
@@ -87,7 +85,7 @@
 
         .credit-text {
             display: block;
-            font-size: 7.5px; /* Texto más pequeño para el diseño */
+            font-size: 7.5px;
             opacity: 0.6;
             margin-top: 2px;
             text-transform: lowercase;
@@ -102,14 +100,14 @@
         }
         .blue-link:hover { opacity: 1; text-decoration: underline; }
 
-        /* --- CONTENIDO --- */
-        main { padding-bottom: 120px; }
+        /* --- GALERÍA PRINCIPAL --- */
+        main { padding-bottom: 150px; }
 
         .main-gallery {
             padding: 160px 15px 40px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: minmax(25vh, auto);
+            grid-auto-rows: minmax(20vh, auto);
             gap: 12px;
             max-width: 1200px;
             margin: 0 auto;
@@ -132,10 +130,10 @@
 
         .photo-item:hover img { opacity: 0.85; transform: scale(1.02); }
 
-        .cat-panoramicas { grid-column: span 2; height: 40vh; }
-        .cat-retratos { grid-column: span 1; height: 35vh; }
-        .cat-nocturnas { grid-column: span 1; height: 35vh; }
-        .cat-macros { grid-column: span 2; height: 25vh; }
+        /* Layout de categorías */
+        .cat-xl { grid-column: span 2; height: 40vh; }
+        .cat-lg { grid-column: span 1; height: 35vh; }
+        .cat-md { grid-column: span 1; height: 25vh; }
 
         .label {
             position: absolute;
@@ -152,7 +150,7 @@
             border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* --- FOLDER VIEW --- */
+        /* --- VISTA DE CARPETA --- */
         #folder-view {
             display: none;
             padding: 160px 20px 180px;
@@ -188,7 +186,8 @@
             text-transform: lowercase; 
             color: rgba(255,255,255,0.4); 
             cursor: pointer;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
+            display: inline-block;
         }
 
         /* --- VISOR --- */
@@ -204,25 +203,16 @@
         #viewer:hover .nav-btn { opacity: 0.2; }
         .nav-btn:hover { opacity: 0.9 !important; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .header, .footer { padding: 20px 20px; }
-            .main-gallery { padding: 130px 10px 40px; grid-template-columns: 1fr; }
-            .cat-panoramicas, .cat-retratos, .cat-nocturnas, .cat-macros { grid-column: span 1; height: 30vh; }
+            .main-gallery { grid-template-columns: 1fr; }
+            .cat-xl, .cat-lg, .cat-md { grid-column: span 1; height: 30vh; }
             .masonry-container { columns: 2; }
-            .footer-text { font-size: 8px; }
-            .credit-text { font-size: 7px; }
-        }
-
-        @media (max-width: 480px) {
-            .masonry-container { columns: 1; }
-            .nav-btn { display: none; }
         }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <header class="fixed-layer header">
+    <header id="main-header" class="fixed-layer header">
         <div class="layer-content">
             <img src="logo%20inclinado%20negro.png" class="header-icon" alt="Logo rodante" onclick="showHome()">
             <div class="logo-text" onclick="showHome()">rodante</div>
@@ -231,37 +221,65 @@
 
     <main>
         <section id="home-page" class="main-gallery">
-            <div class="photo-item cat-panoramicas" onclick="openFolder('panoramicas')">
+            <!-- Panorámicas -->
+            <div class="photo-item cat-xl" onclick="openFolder('panoramicas')">
                 <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas" draggable="false">
                 <div class="label">panorámicas</div>
             </div>
             
-            <div class="photo-item cat-retratos" onclick="openFolder('retratos')">
+            <!-- Retratos -->
+            <div class="photo-item cat-lg" onclick="openFolder('retratos')">
                 <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos" draggable="false">
                 <div class="label">retratos</div>
             </div>
 
-            <div class="photo-item cat-nocturnas" onclick="openFolder('nocturnas')">
+            <!-- Nocturnas -->
+            <div class="photo-item cat-lg" onclick="openFolder('nocturnas')">
                 <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas" draggable="false">
                 <div class="label">nocturnas</div>
             </div>
 
-            <div class="photo-item cat-macros" onclick="openFolder('macros')">
+            <!-- Deportes -->
+            <div class="photo-item cat-xl" onclick="openFolder('deportes')">
+                <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop" alt="Deportes" draggable="false">
+                <div class="label">deportes</div>
+            </div>
+
+            <!-- Blanco y Negro -->
+            <div class="photo-item cat-lg" onclick="openFolder('bn')">
+                <img src="https://images.unsplash.com/photo-1470124114660-23b044d0ecfb?q=80&w=2070&auto=format&fit=crop" alt="Blanco y Negro" draggable="false">
+                <div class="label">blanco y negro</div>
+            </div>
+
+            <!-- Naturaleza -->
+            <div class="photo-item cat-lg" onclick="openFolder('naturaleza')">
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop" alt="Naturaleza" draggable="false">
+                <div class="label">naturaleza</div>
+            </div>
+
+            <!-- Macros (ACTUALIZADA) -->
+            <div class="photo-item cat-md" onclick="openFolder('macros')">
                 <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros" draggable="false">
                 <div class="label">macros</div>
+            </div>
+
+            <!-- Arquitectura -->
+            <div class="photo-item cat-md" onclick="openFolder('arquitectura')">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Arquitectura" draggable="false">
+                <div class="label">arquitectura</div>
             </div>
         </section>
 
         <section id="folder-view">
+            <div class="layer-content" style="align-items: flex-start; max-width: 1400px; margin: 0 auto;">
+                <div class="back-btn" onclick="showHome()">[ volver al inicio ]</div>
+            </div>
             <div id="masonry-container" class="masonry-container"></div>
         </section>
     </main>
 
-    <footer class="fixed-layer footer">
+    <footer id="main-footer" class="fixed-layer footer">
         <div class="layer-content">
-            <div id="back-nav" style="display: none;">
-                <div class="back-btn" onclick="showHome()">[ volver al inicio ]</div>
-            </div>
             <div class="footer-text">
                 © <span id="year"></span> rodante — todos los derechos reservados
                 <span class="credit-text">
@@ -275,7 +293,7 @@
         <div class="viewer-close">CERRAR</div>
         <div class="nav-btn" style="left:0" onclick="event.stopPropagation(); changePhoto(-1)">‹</div>
         <div class="nav-btn" style="right:0" onclick="event.stopPropagation(); changePhoto(1)">›</div>
-        <img id="viewer-img" src="" draggable="false" oncontextmenu="return false;">
+        <img id="viewer-img" src="" draggable="false">
     </div>
 
     <script>
@@ -286,60 +304,46 @@
                 "https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg",
                 "https://live.staticflickr.com/65535/48927874868_a2a4a12457_b.jpg",
                 "https://live.staticflickr.com/65535/48807744627_9cdb17a0e9_b.jpg",
-                "https://live.staticflickr.com/5516/11324887693_50c01627dc_b.jpg",
-                "https://live.staticflickr.com/65535/53352155968_fabb2f983c_b.jpg",
-                "https://live.staticflickr.com/4854/31932303167_c8edaa4ea0_b.jpg",
-                "https://live.staticflickr.com/7823/32998262948_9239dd45d6_b.jpg",
-                "https://live.staticflickr.com/4907/32998262538_d0cdcd33c6_b.jpg",
-                "https://live.staticflickr.com/4866/32998261958_31f81d651b_b.jpg",
-                "https://live.staticflickr.com/8877/17570982642_b74be2ab95_b.jpg",
-                "https://live.staticflickr.com/5316/14172388132_5c5b33d4d5_b.jpg",
-                "https://live.staticflickr.com/8246/8479454738_c03df0a782_b.jpg",
-                "https://live.staticflickr.com/8399/8606677981_7940ae5062_b.jpg",
-                "https://live.staticflickr.com/4046/4472556919_b485a2706e_b.jpg"
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop"
             ],
             retratos: [
                 "https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg",
                 "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg",
-                "https://live.staticflickr.com/3004/2451484681_99203ea098_b.jpg",
-                "https://live.staticflickr.com/8174/7988106553_5d46562d61_b.jpg",
-                "https://live.staticflickr.com/65535/52838568502_2a9be494af_b.jpg",
-                "https://live.staticflickr.com/65535/52858631615_0d891f59af_b.jpg",
-                "https://live.staticflickr.com/4089/4974819976_fe6ebed28d_b.jpg",
-                "https://live.staticflickr.com/3041/2470906563_807780a89a_b.jpg",
-                "https://live.staticflickr.com/2569/4039397686_9e42450769_b.jpg",
-                "https://live.staticflickr.com/65535/52890559297_7c0f74b02a_b.jpg",
-                "https://live.staticflickr.com/8653/16628204166_df9204e300_b.jpg",
-                "https://live.staticflickr.com/3075/2674106756_5bcd6bcf72_b.jpg",
-                "https://live.staticflickr.com/2648/4092163383_55962ba163_b.jpg",
-                "https://live.staticflickr.com/2940/14173943340_9efd53125e_b.jpg",
-                "https://live.staticflickr.com/5518/11665162033_6263295026_b.jpg",
-                "https://live.staticflickr.com/2492/3761185143_c247bd897a_b.jpg",
-                "https://live.staticflickr.com/2014/5787212615_fe57b5e781_b.jpg",
-                "https://live.staticflickr.com/3005/2364100184_172f56af36_b.jpg",
-                "https://live.staticflickr.com/3281/2821723518_54a5f4b2e9_b.jpg",
-                "https://live.staticflickr.com/2640/3859153972_cf9c20e1aa_b.jpg",
-                "https://live.staticflickr.com/3705/11354515085_b62e41b96f_b.jpg",
-                "https://live.staticflickr.com/2454/3671874644_03a46af8a1_b.jpg"
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop"
             ],
             nocturnas: [
                 "https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg",
                 "https://live.staticflickr.com/65535/49229687873_84d7ce7bdc_b.jpg",
-                "https://live.staticflickr.com/4154/4968702353_5a241dce18_b.jpg",
-                "https://live.staticflickr.com/4102/4931251525_936a378b6a_b.jpg",
-                "https://live.staticflickr.com/4019/4230096685_b63cdb3eee_b.jpg",
-                "https://live.staticflickr.com/4120/4940550217_a9e495b5d0_b.jpg",
-                "https://live.staticflickr.com/4040/5154781630_266143af5c_b.jpg",
-                "https://live.staticflickr.com/4053/5166378119_dc40043f46_b.jpg",
-                "https://live.staticflickr.com/6084/6145248770_0edfbd76b2_b.jpg",
-                "https://live.staticflickr.com/3319/3186819847_b09b20354c_b.jpg",
-                "https://live.staticflickr.com/2573/3701168202_1a59e6fa34_b.jpg",
-                "https://live.staticflickr.com/3386/3566218504_ebd31e17f8_b.jpg",
-                "https://live.staticflickr.com/3375/3628957044_c4362f3cfa_b.jpg"
+                "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop"
+            ],
+            deportes: [
+                "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=2069&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1461896736914-cda24651d11f?q=80&w=2070&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1541252260730-0412e8e2108e?q=80&w=2074&auto=format&fit=crop"
+            ],
+            bn: [
+                "https://images.unsplash.com/photo-1470124114660-23b044d0ecfb?q=80&w=2070&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?q=80&w=2070&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=2070&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1505322022379-7c3353ee6291?q=80&w=2070&auto=format&fit=crop"
+            ],
+            arquitectura: [
+                "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2071&auto=format&fit=crop"
+            ],
+            naturaleza: [
+                "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1874&auto=format&fit=crop"
             ],
             macros: [
                 "https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg",
-                "https://live.staticflickr.com/2382/2420606177_066aca122c_b.jpg"
+                "https://live.staticflickr.com/2382/2420606177_066aca122c_b.jpg",
+                "https://live.staticflickr.com/3193/2434531398_d07439347f_b.jpg",
+                "https://live.staticflickr.com/3121/2464264720_9ef862878f_b.jpg",
+                "https://live.staticflickr.com/3387/3314202010_0a47624a5e_b.jpg",
+                "https://live.staticflickr.com/3204/2448396549_6cdb515e47_b.jpg",
+                "https://live.staticflickr.com/3354/3638682340_a93aa9cb2a_b.jpg"
             ]
         };
 
@@ -349,7 +353,6 @@
         function showHome() {
             document.getElementById('home-page').style.display = 'grid';
             document.getElementById('folder-view').style.display = 'none';
-            document.getElementById('back-nav').style.display = 'none';
             document.getElementById('viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
             window.scrollTo(0,0);
@@ -364,13 +367,12 @@
                 const item = document.createElement('div');
                 item.className = 'masonry-item';
                 item.onclick = (e) => { e.stopPropagation(); openViewer(idx); };
-                item.innerHTML = `<img src="${url}" loading="lazy" draggable="false" oncontextmenu="return false;">`;
+                item.innerHTML = `<img src="${url}" loading="lazy" draggable="false">`;
                 container.appendChild(item);
             });
 
             document.getElementById('home-page').style.display = 'none';
             document.getElementById('folder-view').style.display = 'block';
-            document.getElementById('back-nav').style.display = 'block';
             window.scrollTo(0,0);
         }
 
@@ -379,15 +381,15 @@
             document.getElementById('viewer-img').src = currentActiveGallery[currentIndex];
             document.getElementById('viewer').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            document.querySelector('.header').style.opacity = '0';
-            document.querySelector('.footer').style.opacity = '0';
+            document.getElementById('main-header').style.opacity = '0';
+            document.getElementById('main-footer').style.opacity = '0';
         }
 
         function closeViewer() {
             document.getElementById('viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
-            document.querySelector('.header').style.opacity = '1';
-            document.querySelector('.footer').style.opacity = '1';
+            document.getElementById('main-header').style.opacity = '1';
+            document.getElementById('main-footer').style.opacity = '1';
         }
 
         function changePhoto(step) {
