@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEGURIDAD Y PRIVACIDAD -->
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <!-- SEO TÉCNICO AVANZADO -->
+    <title>rodante | Fotografía Profesional en Almería y Retrato</title>
+    <meta name="description" content="Explora el archivo visual completo de rodante. Especialista en retratos artísticos, paisajes de Almería, deportes y naturaleza.">
+    <meta name="keywords" content="rodante, fotógrafo Almería, retratos, Cabo de Gata, Tabernas, fotografía de deportes, naturaleza">
+    <meta name="author" content="rodante">
+    <link rel="canonical" href="https://rodante.es">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap');
+
+        :root {
+            --bg: #030303;
+            --panel: rgba(255,255,255,0.045);
+            --line: rgba(255,255,255,0.10);
+            --soft: rgba(255,255,255,0.48);
+            --text: rgba(255,255,255,0.92);
+            --accent: rgba(255,255,255,0.16);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body { 
+            background:
+                radial-gradient(circle at top center, rgba(255,255,255,0.08), transparent 28%),
+                linear-gradient(to bottom, #050505 0%, #030303 38%, #020202 100%);
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(to right, transparent 0%, rgba(255,255,255,0.018) 50%, transparent 100%);
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* --- UI ELEMENTS --- */
+        .fixed-layer { position: fixed; left: 0; width: 100%; z-index: 1000; pointer-events: none; }
+        .header { 
+            top: 0;
+            padding: 24px 22px 0;
+            transition: transform 0.45s ease, opacity 0.45s ease;
+        }
+        .footer { bottom: 0; padding: 20px 24px 26px; background: linear-gradient(to top, rgba(3,3,3,0.94) 52%, transparent); }
+
+        .layer-content { pointer-events: auto; }
+
+        .brand-shell {
+            position: relative;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 24px 32px 20px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background:
+                linear-gradient(to bottom, rgba(255,255,255,0.055), rgba(255,255,255,0.02)),
+                rgba(0,0,0,0.42);
+            backdrop-filter: blur(18px) saturate(120%);
+            box-shadow:
+                0 14px 50px rgba(0,0,0,0.36),
+                inset 0 1px 0 rgba(255,255,255,0.04);
+            overflow: hidden;
+        }
+
+        .brand-shell::before,
+        .brand-shell::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.22), transparent);
+        }
+
+        .brand-shell::before { left: 26px; }
+        .brand-shell::after { right: 26px; }
+
+        .brand-shell-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .brand-mark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.14);
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.16), transparent 60%),
+                rgba(255,255,255,0.03);
+            box-shadow: 0 0 0 8px rgba(255,255,255,0.02);
+            cursor: pointer;
+            transition: transform 0.35s ease, border-color 0.35s ease, opacity 0.35s ease;
+        }
+
+        .brand-mark:hover { transform: translateY(-2px) scale(1.02); border-color: rgba(255,255,255,0.24); }
+        .brand-mark img { width: 24px; height: 24px; filter: invert(1); opacity: 0.78; }
+
+        .brand-kicker {
+            font-size: 9px;
+            letter-spacing: 0.55em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.42);
+            margin-left: 0.55em;
+        }
+
+        .logo-text {
+            font-weight: 200;
+            letter-spacing: 1.35em;
+            text-transform: lowercase;
+            font-size: clamp(0.92rem, 1.3vw, 1.12rem);
+            cursor: pointer;
+            margin-right: -1.35em;
+            color: var(--text);
+            line-height: 1;
+            transition: letter-spacing 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .logo-text:hover { transform: translateY(-1px); }
+
+        .brand-subtitle {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 10px;
+            letter-spacing: 0.48em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.56);
+            padding: 9px 16px 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.028);
+            margin-left: 0.48em;
+        }
+
+        .brand-subtitle::before,
+        .brand-subtitle::after {
+            content: "";
+            width: 18px;
+            height: 1px;
+            background: rgba(255,255,255,0.16);
+        }
+
+        .footer-text { font-size: 9px; font-weight: 300; letter-spacing: 0.10em; color: rgba(255, 255, 255, 0.35); text-align: center; line-height: 1.8; }
+
+        /* --- GRID PRINCIPAL --- */
+        .main-gallery {
+            position: relative;
+            z-index: 1;
+            padding: 230px 18px 190px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: minmax(20vh, auto);
+            gap: 14px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #050505;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+            isolation: isolate;
+        }
+
+        .photo-item::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.60), transparent 48%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .photo-item::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.035);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.46;
+            transition: transform 4.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 1.0s ease, filter 1s ease;
+            filter: saturate(0.92) contrast(1.03);
+        }
+
+        .photo-item:hover img { opacity: 0.88; transform: scale(1.04); filter: saturate(1) contrast(1.06); }
+
+        .cat-xl { grid-column: span 2; height: 46vh; }
+        .cat-lg { grid-column: span 1; height: 36vh; }
+
+        .label {
+            position: absolute;
+            bottom: 22px;
+            left: 22px;
+            z-index: 3;
+            font-size: 9px;
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            text-transform: lowercase;
+            padding: 10px 16px 9px;
+            color: rgba(255, 255, 255, 0.68);
+            background: rgba(255, 255, 255, 0.045);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+        }
+
+        /* --- MASONRY VIEW --- */
+        #folder-view { display: none; padding: 210px 20px 200px; animation: fadeIn 0.8s ease; position: relative; z-index: 1; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .masonry-container { columns: 3 300px; column-gap: 16px; max-width: 1400px; margin: 0 auto; }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+            background: #080808;
+            cursor: pointer;
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .masonry-item img { width: 100%; display: block; opacity: 0.82; transition: 0.45s; pointer-events: none; }
+        .masonry-item:hover img { opacity: 1; transform: scale(1.01); }
+
+        .img-caption { 
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 7px; 
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+            padding: 8px 10px 7px;
+            background: rgba(0,0,0,0.28);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .masonry-item:hover .img-caption { opacity: 1; }
+
+        .back-btn {
+            font-size: 8px;
+            letter-spacing: 0.5em;
+            text-transform: lowercase;
+            color: rgba(255,255,255,0.55);
+            cursor: pointer;
+            margin-bottom: 34px;
+            display: inline-block;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 999px;
+            padding: 12px 18px 11px;
+            transition: 0.25s;
+        }
+        .back-btn:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); }
+
+        /* --- VISOR --- */
+        #viewer {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 2000;
+            align-items: center; justify-content: center; backdrop-filter: blur(25px);
+        }
+        .viewer-shield { position: absolute; inset: 0; z-index: 2001; }
+        #viewer img { max-width: 95vw; max-height: 90vh; object-fit: contain; position: relative; z-index: 2002; }
+
+        .viewer-info { position: absolute; bottom: 40px; text-align: center; width: 100%; font-size: 10px; letter-spacing: 0.3em; color: rgba(255,255,255,0.5); text-transform: lowercase; z-index: 2003; }
+        .viewer-close { position: absolute; top: 40px; right: 40px; font-size: 10px; letter-spacing: 0.4em; cursor: pointer; opacity: 0.4; z-index: 2003; }
+
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); padding: 50px; cursor: pointer; font-size: 40px; font-weight: 100; opacity: 0; transition: 0.3s; color: white; background: transparent; border: none; z-index: 2003; }
+        #viewer:hover .nav-btn { opacity: 0.3; }
+        .nav-btn:hover { opacity: 1 !important; }
+
+        body.scrolled .header { transform: translateY(-4px); }
+        body.scrolled .brand-shell {
+            padding-top: 15px;
+            padding-bottom: 14px;
+            border-radius: 24px;
+            background: rgba(0,0,0,0.56);
+        }
+        body.scrolled .brand-mark { width: 42px; height: 42px; box-shadow: none; }
+        body.scrolled .brand-mark img { width: 18px; height: 18px; }
+        body.scrolled .logo-text { letter-spacing: 1.0em; margin-right: -1.0em; font-size: 0.85rem; }
+        body.scrolled .brand-subtitle { font-size: 9px; letter-spacing: 0.36em; padding: 7px 12px 6px; }
+
+        @media (max-width: 768px) {
+            .header { padding: 14px 12px 0; }
+            .brand-shell { padding: 18px 16px 16px; border-radius: 22px; }
+            .brand-shell::before, .brand-shell::after { width: 44px; top: 14px; }
+            .brand-mark { width: 46px; height: 46px; }
+            .brand-mark img { width: 20px; height: 20px; }
+            .logo-text { font-size: 0.82rem; letter-spacing: 0.72em; margin-right: -0.72em; }
+            .brand-kicker { font-size: 8px; letter-spacing: 0.4em; }
+            .brand-subtitle { font-size: 8px; letter-spacing: 0.26em; gap: 8px; padding: 8px 11px 7px; margin-left: 0.26em; }
+            .brand-subtitle::before, .brand-subtitle::after { width: 10px; }
+            .main-gallery { grid-template-columns: 1fr; padding-top: 170px; gap: 12px; }
+            .cat-xl, .cat-lg { grid-column: span 1; height: 34vh; }
+            #folder-view { padding-top: 160px; }
+            .masonry-container { columns: 2; }
+            .nav-btn { display: none; }
+            .viewer-close { top: 22px; right: 20px; }
+        }
+    </style>
+
+</head>
+<body oncontextmenu="return false;">
+
+    <h1 class="sr-only">rodante - Archivo Profesional de Fotografía</h1>
+
+    
+    <header id="main-header" class="fixed-layer header">
+        <nav class="layer-content">
+            <div class="brand-shell">
+                <div class="brand-shell-inner">
+                    <div class="brand-mark" onclick="showHome()" aria-label="Volver al inicio">
+                        <img src="logo%20inclinado%20negro.png" alt="Logo rodante">
+                    </div>
+                    <div class="brand-kicker">rodante</div>
+                    <div class="logo-text" onclick="showHome()">rodante</div>
+                    <div class="brand-subtitle">archivo fotográfico</div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="home-page" class="main-gallery">
+            <article class="photo-item cat-xl" onclick="openFolder('panoramicas')">
+                <img src="https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg" alt="Panorámicas" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">panorámicas</h2>
+            </article>
+            
+            <article class="photo-item cat-lg" onclick="openFolder('retratos')">
+                <img src="https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg" alt="Retratos" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">retratos</h2>
+            </article>
+
+            <article class="photo-item cat-lg" onclick="openFolder('nocturnas')">
+                <img src="https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg" alt="Nocturnas" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">nocturnas</h2>
+            </article>
+
+            <article class="photo-item cat-xl" onclick="openFolder('hollywood')">
+                <img src="https://live.staticflickr.com/1073/5120019577_a5f1a90897_b.jpg" alt="Mini Hollywood" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">mini hollywood</h2>
+            </article>
+
+            <article class="photo-item cat-lg" onclick="openFolder('deportes')">
+                <img src="https://live.staticflickr.com/65535/52703815338_eedfa7a171_b.jpg" alt="Deportes" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">deportes</h2>
+            </article>
+
+            <article class="photo-item cat-lg" onclick="openFolder('naturaleza')">
+                <img src="https://live.staticflickr.com/2326/2345296962_a97217acb6_b.jpg" alt="Naturaleza" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">naturaleza</h2>
+            </article>
+
+            <article class="photo-item cat-xl" onclick="openFolder('macros')">
+                <img src="https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg" alt="Macros" draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+                <h2 class="label">macros</h2>
+            </article>
+        </section>
+
+        <section id="folder-view">
+            <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+                <button class="back-btn" onclick="showHome()">[ volver al índice ]</button>
+            </div>
+            <div id="masonry-container" class="masonry-container"></div>
+        </section>
+    </main>
+
+    <footer id="main-footer" class="fixed-layer footer">
+        <div class="layer-content">
+            <div class="footer-text">
+                © <span id="year"></span> rodante — archivo visual protegido
+            </div>
+        </div>
+    </footer>
+
+    <div id="viewer" onclick="closeViewer()">
+        <div class="viewer-shield"></div>
+        <div class="viewer-close">ESC / CERRAR</div>
+        <button class="nav-btn" style="left:0" onclick="event.stopPropagation(); changePhoto(-1)">‹</button>
+        <button class="nav-btn" style="right:0" onclick="event.stopPropagation(); changePhoto(1)">›</button>
+        <img id="viewer-img" src="" alt="Cargando..." draggable="false" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+        <div id="viewer-caption" class="viewer-info"></div>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const syncHeaderState = () => {
+            document.body.classList.toggle('scrolled', window.scrollY > 28);
+        };
+        syncHeaderState();
+        window.addEventListener('scroll', syncHeaderState, { passive: true });
+
+        const GALLERIES = {
+            panoramicas: [
+                { url: "https://live.staticflickr.com/65535/52771281467_92e7f39e67_b.jpg", title: "Atardecer" },
+                { url: "https://live.staticflickr.com/65535/48927874868_a2a4a12457_b.jpg", title: "Rodalquilar" },
+                { url: "https://live.staticflickr.com/65535/48807744627_9cdb17a0e9_b.jpg", title: "Cabo de Gata" },
+                { url: "https://live.staticflickr.com/5516/11324887693_50c01627dc_b.jpg", title: "Arrimar el Hombro" },
+                { url: "https://live.staticflickr.com/65535/53352155968_fabb2f983c_b.jpg", title: "Vélez Blanco" }
+            ],
+            retratos: [
+                { url: "https://live.staticflickr.com/65535/55142314427_0eea5b7fc4_b.jpg", title: "Alma" },
+                { url: "https://live.staticflickr.com/65535/52867389660_1047c99b76_b.jpg", title: "Retrato" },
+                { url: "https://live.staticflickr.com/65535/55143210951_f624e6131a_b.jpg", title: "Alma" },
+                { url: "https://live.staticflickr.com/3004/2451484681_99203ea098_b.jpg", title: "Recuerdos" },
+                { url: "https://live.staticflickr.com/8174/7988106553_5d46562d61_b.jpg", title: "Mirada" },
+                { url: "https://live.staticflickr.com/65535/52838568502_2a9be494af_b.jpg", title: "Alba" },
+                { url: "https://live.staticflickr.com/65535/52858631615_0d891f59af_b.jpg", title: "Eloy" },
+                { url: "https://live.staticflickr.com/4089/4974819976_fe6ebed28d_b.jpg", title: "J.L. Cruz Amario" },
+                { url: "https://live.staticflickr.com/3041/2470906563_807780a89a_b.jpg", title: "Complicidad" },
+                { url: "https://live.staticflickr.com/2569/4039397686_9e42450769_b.jpg", title: "Organista" },
+                { url: "https://live.staticflickr.com/65535/52890559297_7c0f74b02a_b.jpg", title: "Alba" },
+                { url: "https://live.staticflickr.com/8653/16628204166_df9204e300_b.jpg", title: "Chivi" },
+                { url: "https://live.staticflickr.com/3075/2674106756_5bcd6bcf72_b.jpg", title: "Chivi" },
+                { url: "https://live.staticflickr.com/2648/4092163383_55962ba163_b.jpg", title: "José Joaquín Rojas" },
+                { url: "https://live.staticflickr.com/2940/14173943340_9efd53125e_b.jpg", title: "Dietmar Görlitz" },
+                { url: "https://live.staticflickr.com/5518/11665162033_6263295026_b.jpg", title: "Estudio" },
+                { url: "https://live.staticflickr.com/2492/3761185143_c247bd897a_b.jpg", title: "Retrato" },
+                { url: "https://live.staticflickr.com/2014/5787212615_fe57b5e781_b.jpg", title: "Expresión" },
+                { url: "https://live.staticflickr.com/3005/2364100184_172f56af36_b.jpg", title: "Instante" },
+                { url: "https://live.staticflickr.com/3281/2821723518_54a5f4b2e9_b.jpg", title: "Retrato" },
+                { url: "https://live.staticflickr.com/2640/3859153972_cf9c20e1aa_b.jpg", title: "Facciones" },
+                { url: "https://live.staticflickr.com/3705/11354515085_b62e41b96f_b.jpg", title: "Mirada" },
+                { url: "https://live.staticflickr.com/2454/3671874644_03a46af8a1_b.jpg", title: "Retrato Final" }
+            ],
+            naturaleza: [
+                { url: "https://live.staticflickr.com/2326/2345296962_a97217acb6_b.jpg", title: "Fauna" },
+                { url: "https://live.staticflickr.com/7650/16754653431_7a1503b807_b.jpg", title: "Entorno" },
+                { url: "https://live.staticflickr.com/8868/18278700708_8394b69704_b.jpg", title: "Naturaleza" },
+                { url: "https://live.staticflickr.com/2341/2264390853_b6fd799e75_b.jpg", title: "Paisaje" },
+                { url: "https://live.staticflickr.com/2026/2343710716_7748742aee_b.jpg", title: "Fauna II" },
+                { url: "https://live.staticflickr.com/3173/2844931279_91d4e4286d_b.jpg", title: "Naturaleza III" },
+                { url: "https://live.staticflickr.com/2419/2278598351_6be6d2cf80_b.jpg", title: "Entorno II" },
+                { url: "https://live.staticflickr.com/2119/2312223172_dc3bd7f45a_b.jpg", title: "Detalle" },
+                { url: "https://live.staticflickr.com/2391/2222751812_e9c3f377e1_b.jpg", title: "Natural" },
+                { url: "https://live.staticflickr.com/3351/5716163996_97466d3171_b.jpg", title: "Paisaje III" },
+                { url: "https://live.staticflickr.com/2369/5733703146_c3bd6ca718_b.jpg", title: "Naturaleza IV" },
+                { url: "https://live.staticflickr.com/3271/2804839401_3d818e4812_b.jpg", title: "Entorno III" },
+                { url: "https://live.staticflickr.com/3073/3067065257_4ed169b6ea_b.jpg", title: "Cierre" }
+            ],
+            deportes: [
+                { url: "https://live.staticflickr.com/65535/52703815338_eedfa7a171_b.jpg", title: "Competición" },
+                { url: "https://live.staticflickr.com/65535/52700555708_4a1971c318_b.jpg", title: "Acción" },
+                { url: "https://live.staticflickr.com/2661/3733671785_81ca8fcfd3_b.jpg", title: "Ciclismo" },
+                { url: "https://live.staticflickr.com/2319/2248361626_665c0f6e4c_b.jpg", title: "Deporte" },
+                { url: "https://live.staticflickr.com/65535/52694936484_e8d084e82e_b.jpg", title: "Carrera" },
+                { url: "https://live.staticflickr.com/4125/4963441464_9f3aec7b59_c.jpg", title: "Competición II" },
+                { url: "https://live.staticflickr.com/2420/2418406675_fda5ff97d4_b.jpg", title: "Esfuerzo" },
+                { url: "https://live.staticflickr.com/2255/2313520921_efc8472de3_b.jpg", title: "Acción II" },
+                { url: "https://live.staticflickr.com/3212/2324566276_79e1ce3a0e_b.jpg", title: "Meta" },
+                { url: "https://live.staticflickr.com/3041/2309906282_58a654ff08_b.jpg", title: "Deporte II" },
+                { url: "https://live.staticflickr.com/3208/2288066822_8ede1fb627_b.jpg", title: "Velocidad" },
+                { url: "https://live.staticflickr.com/2367/2267953533_5e3e7d3157_b.jpg", title: "Competición Final" }
+            ],
+            nocturnas: [
+                { url: "https://live.staticflickr.com/7244/7310126402_b01371ba26_b.jpg", title: "Faroles" },
+                { url: "https://live.staticflickr.com/4154/4968702353_5a241dce18_b.jpg", title: "Puerto de Águilas" },
+                { url: "https://live.staticflickr.com/4019/4230096685_b63cdb3eee_b.jpg", title: "Lorca Nocturna" }
+            ],
+            hollywood: [
+                { url: "https://live.staticflickr.com/1073/5120019577_a5f1a90897_b.jpg", title: "Mini Hollywood" },
+                { url: "https://live.staticflickr.com/4146/5083138317_38c26f3603_b.jpg", title: "Oeste" },
+                { url: "https://live.staticflickr.com/4154/5064505786_0f364244e5_b.jpg", title: "Pueblo" },
+                { url: "https://live.staticflickr.com/4088/5058794107_76598e7133_b.jpg", title: "Saloon" },
+                { url: "https://live.staticflickr.com/4109/5056125627_4b5b11d2c1_b.jpg", title: "Calle" },
+                { url: "https://live.staticflickr.com/4106/5085327169_994b02dd11_b.jpg", title: "Western" }
+            ],
+            macros: [
+                { url: "https://live.staticflickr.com/3212/2826709075_d52e578602_b.jpg", title: "Flor" },
+                { url: "https://live.staticflickr.com/2382/2420606177_066aca122c_b.jpg", title: "Macro II" },
+                { url: "https://live.staticflickr.com/3193/2434531398_d07439347f_b.jpg", title: "Textura" },
+                { url: "https://live.staticflickr.com/3121/2464264720_9ef862878f_b.jpg", title: "Naturaleza" },
+                { url: "https://live.staticflickr.com/3387/3314202010_0a47624a5e_b.jpg", title: "Detalle" },
+                { url: "https://live.staticflickr.com/3204/2448396549_6cdb515e47_b.jpg", title: "Macro III" },
+                { url: "https://live.staticflickr.com/3354/3638682340_a93aa9cb2a_b.jpg", title: "Botánica" }
+            ]
+        };
+
+        let currentActiveGallery = [];
+        let currentIndex = 0;
+
+        function showHome() {
+            document.getElementById('home-page').style.display = 'grid';
+            document.getElementById('folder-view').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0,0);
+        }
+
+        function openFolder(id) {
+            currentActiveGallery = GALLERIES[id];
+            const container = document.getElementById('masonry-container');
+            container.innerHTML = '';
+            currentActiveGallery.forEach((item, idx) => {
+                const el = document.createElement('div');
+                el.className = 'masonry-item';
+                el.onclick = () => openViewer(idx);
+                el.innerHTML = `<img src="${item.url}" draggable="false" alt="${item.title}" loading="lazy" decoding="async" referrerpolicy="no-referrer"><div class="img-caption">${item.title}</div>`;
+                container.appendChild(el);
+            });
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('folder-view').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function openViewer(index) {
+            currentIndex = index;
+            updateViewer();
+            document.getElementById('viewer').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('main-header').style.opacity = '0';
+        }
+
+        function updateViewer() {
+            const item = currentActiveGallery[currentIndex];
+            const img = document.getElementById('viewer-img');
+            img.style.opacity = '0';
+            img.src = item.url;
+            img.onload = () => img.style.opacity = '1';
+            document.getElementById('viewer-caption').textContent = item.title;
+        }
+
+        function closeViewer() {
+            document.getElementById('viewer').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('main-header').style.opacity = '1';
+        }
+
+        function changePhoto(step) {
+            currentIndex = (currentIndex + step + currentActiveGallery.length) % currentActiveGallery.length;
+            updateViewer();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('viewer').style.display === 'flex') {
+                if (e.key === 'ArrowRight') changePhoto(1);
+                if (e.key === 'ArrowLeft') changePhoto(-1);
+                if (e.key === 'Escape') closeViewer();
+            }
+        });
+    </script>
+</body>
+</html>
+   
