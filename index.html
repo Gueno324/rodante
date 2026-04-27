@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#050505">
   <title>rodante | Fotografía de autor</title>
   <meta name="description" content="Portfolio fotográfico de rodante. Retrato, paisaje, naturaleza, deporte, macro y fotografía nocturna.">
-  <meta name="keywords" content="rodante, fotografía, portfolio, fotógrafo, Almería, retrato, paisaje, naturaleza, deporte, macro, Flickr">
+  <meta name="keywords" content="rodante, fotografía, portfolio, fotógrafo, Almería, retrato, paisaje, naturaleza, deporte, macro">
   <meta name="author" content="rodante">
   <link rel="canonical" href="https://rodante.es">
   <style>
@@ -281,6 +281,67 @@
       .viewer-prev { left:18px; }
       .viewer-next { right:18px; }
     }
+    /* Ajuste móvil reforzado */
+    @media (max-width: 720px) {
+      .topbar { padding:10px 12px; background:rgba(5,5,5,.92); }
+      .topbar-inner { gap:10px; }
+      .brand { gap:10px; min-width:0; }
+      .brand-title { min-width:0; }
+      .brand-title strong { font-size:.74rem; letter-spacing:.34em; margin-right:-.34em; white-space:nowrap; }
+      .brand-title span { display:none; }
+      .brand-mark { width:38px; height:38px; flex:0 0 38px; }
+      .brand-mark img { width:20px; height:20px; }
+      .btn { min-height:42px; padding:0 14px; font-size:.68rem; letter-spacing:.1em; }
+      .menu-toggle { padding:0 13px; min-height:40px; }
+      .nav { top:62px; left:10px; right:10px; max-height:calc(100vh - 78px); overflow:auto; }
+      .hero { min-height:auto; padding:96px 16px 38px; align-items:start; }
+      .hero::after { background:linear-gradient(180deg,rgba(5,5,5,.50),rgba(5,5,5,.96) 72%,#050505 100%); }
+      .hero-bg img { opacity:.28; object-position:center top; }
+      .hero-content { display:block; }
+      .eyebrow { font-size:.62rem; letter-spacing:.18em; line-height:1.6; margin-bottom:14px; }
+      h1 { font-size:clamp(2.55rem,17vw,4.8rem); line-height:.92; letter-spacing:-.055em; max-width:100%; }
+      .hero-lead { margin-top:18px; font-size:.98rem; line-height:1.65; }
+      .hero-actions { gap:9px; margin-top:22px; }
+      .hero-actions .btn { flex:1 1 100%; width:100%; }
+      .hero-card { margin-top:24px; padding:16px; border-radius:22px; }
+      .hero-card .section-text { font-size:.9rem; line-height:1.55; }
+      .stats { grid-template-columns:repeat(3,1fr); gap:7px; }
+      .stat { padding:10px 6px; text-align:center; border-radius:14px; }
+      .stat strong { font-size:1.08rem; }
+      .stat span { font-size:.57rem; }
+      section { padding:48px 14px; }
+      .section-head { margin-bottom:18px; }
+      h2.section-title { font-size:clamp(2rem,12vw,3rem); line-height:1; letter-spacing:-.045em; }
+      .section-text { font-size:.94rem; line-height:1.65; }
+      .category-grid { gap:12px; }
+      .category-card, .category-card.wide { min-height:260px; border-radius:22px; }
+      .category-content { padding:18px; }
+      .category-content h3 { font-size:2rem; }
+      .category-content p { font-size:.9rem; line-height:1.5; }
+      .tools { border-radius:20px; padding:10px; }
+      .filters { display:flex; overflow:auto; flex-wrap:nowrap; padding-bottom:4px; -webkit-overflow-scrolling:touch; }
+      .filter-btn { flex:0 0 auto; padding:9px 11px; font-size:.64rem; }
+      .gallery-grid { columns:2 145px; column-gap:10px; }
+      .gallery-item { margin-bottom:10px; border-radius:16px; }
+      .gallery-item figcaption { padding:10px; font-size:.68rem; }
+      .about-grid { gap:12px; }
+      .panel { padding:18px; border-radius:22px; }
+      .panel h3 { font-size:1.65rem; }
+      .service { padding:13px; border-radius:16px; }
+      .footer { padding:28px 14px 36px; font-size:.82rem; }
+      .footer-inner { display:block; }
+      .footer-inner span { display:block; margin-bottom:8px; }
+      .viewer img { max-width:100vw; max-height:78vh; }
+      .viewer-actions { top:12px; right:12px; }
+      .viewer button { width:42px; height:42px; }
+      .viewer-caption { max-width:88vw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    }
+
+    @media (max-width: 380px) {
+      .gallery-grid { columns:1 100%; }
+      .stats { grid-template-columns:1fr; }
+    }
+
   </style>
 </head>
 <body oncontextmenu="return false;">
@@ -296,7 +357,6 @@
         <a href="#galerias">Galerías</a>
         <a href="#archivo">Archivo</a>
         <a href="#autor">Autor</a>
-        <a href="#contacto">Contacto</a>
         <button type="button" onclick="openRandomPhoto()">Azar</button>
       </nav>
       <button class="btn menu-toggle" type="button" onclick="toggleMenu()">Menú</button>
@@ -312,19 +372,17 @@
           <h1>mirar lento, recordar mejor.</h1>
           <p class="hero-lead">
             Una selección fotográfica organizada por series: panorámicas, retratos, nocturnas, naturaleza,
-            deporte, macro y escenas del oeste. Las imágenes se sirven desde Flickr para mantener la web ligera.
+            deporte, macro y escenas del oeste. Una web visual, limpia y preparada para móvil.
           </p>
           <div class="hero-actions">
             <a class="btn primary" href="#galerias">Entrar en galerías</a>
             <a class="btn" href="#archivo">Ver archivo completo</a>
-            <a class="btn" href="https://www.flickr.com/" target="_blank" rel="noopener noreferrer">Flickr</a>
           </div>
         </div>
         <aside class="hero-card" aria-label="Resumen del archivo">
           <h2>Portfolio activo</h2>
           <p class="section-text" style="margin:0;">
-            Web estática, rápida y ampliable. Puedes añadir nuevas fotos cambiando solo los enlaces de Flickr
-            dentro del bloque de galerías.
+            Web estática, rápida y ampliable. Preparada para mostrar el archivo fotográfico con una carga ligera y una navegación sencilla.
           </p>
           <div class="stats">
             <div class="stat"><strong id="stat-galleries">7</strong><span>series</span></div>
@@ -386,26 +444,11 @@
             <div class="service"><strong>Retrato</strong><span>Sesiones personales, editoriales y retrato artístico.</span></div>
             <div class="service"><strong>Paisaje</strong><span>Series de territorio, viajes, costa, montaña y desierto.</span></div>
             <div class="service"><strong>Eventos</strong><span>Reportaje documental, deporte, cultura y escenas urbanas.</span></div>
-            <div class="service"><strong>Archivo</strong><span>Galería organizada con enlaces de Flickr y visor ligero.</span></div>
+            <div class="service"><strong>Archivo</strong><span>Galería organizada por series con visor ligero.</span></div>
           </div>
         </article>
       </div>
-    </section>
-
-    <section id="contacto">
-      <div class="wrap contact-box">
-        <div>
-          <p class="section-kicker">contacto</p>
-          <h2 class="section-title">Hablemos de fotografía.</h2>
-          <p class="section-text">Puedes sustituir estos enlaces por tu email real, Instagram, Flickr o WhatsApp.</p>
-        </div>
-        <div class="hero-actions" style="margin:0;">
-          <a class="btn primary" href="mailto:info@rodante.es">Email</a>
-          <a class="btn" href="https://rodante.es" target="_blank" rel="noopener noreferrer">rodante.es</a>
-        </div>
-      </div>
-    </section>
-  </main>
+    </section>  </main>
 
   <footer class="footer">
     <div class="footer-inner">
