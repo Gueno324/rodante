@@ -210,7 +210,11 @@
             .main-gallery { grid-template-columns: 1fr; padding-top: 128px; padding-bottom: 160px; gap: 14px; }
             .cat-xl, .cat-lg { grid-column: span 1; height: 35vh; }
             .masonry-container { columns: 2; }
-            .nav-btn { display: none; }
+            .nav-btn { display: block; padding: 18px; font-size: 34px; opacity: .55; }
+            #viewer img { max-width: 94vw; max-height: 82vh; }
+            .viewer-close { top: 16px; right: 16px; }
+            .viewer-controls { bottom: 68px; gap: 10px; }
+            .viewer-control { padding: 9px 13px; }
             .label { bottom: 18px; left: 18px; padding: 9px 14px; letter-spacing: 0.44em; }
         }
     </style>
@@ -286,11 +290,15 @@
 
     <div id="viewer" onclick="closeViewer()">
         <div class="viewer-shield"></div>
-        <div class="viewer-close">ESC / CERRAR</div>
-        <button class="nav-btn" style="left:0" onclick="event.stopPropagation(); changePhoto(-1)">‹</button>
-        <button class="nav-btn" style="right:0" onclick="event.stopPropagation(); changePhoto(1)">›</button>
-        <img id="viewer-img" src="" alt="Cargando..." draggable="false" loading="lazy" referrerpolicy="no-referrer">
+        <button class="viewer-close" onclick="event.stopPropagation(); closeViewer()">ESC / CERRAR</button>
+        <button class="nav-btn" style="left:0" aria-label="Fotografía anterior" onclick="event.stopPropagation(); changePhoto(-1)">‹</button>
+        <button class="nav-btn" style="right:0" aria-label="Fotografía siguiente" onclick="event.stopPropagation(); changePhoto(1)">›</button>
+        <img id="viewer-img" src="" alt="Fotografía de la galería" draggable="false" referrerpolicy="no-referrer" onclick="event.stopPropagation()">
         <div id="viewer-caption" class="viewer-info"></div>
+        <div class="viewer-controls" onclick="event.stopPropagation()">
+            <button id="slideshow-toggle" class="viewer-control" type="button" aria-label="Pausar presentación" title="Pausar presentación" onclick="toggleSlideshow()">Ⅱ</button>
+            <span id="viewer-counter" class="viewer-counter"></span>
+        </div>
     </div>
 
     <script>
@@ -415,6 +423,8 @@
 
         let currentActiveGallery = [];
         let currentIndex = 0;
+        let slideshowTimer = null;
+        const SLIDESHOW_INTERVAL = 5000; // 5 segundos entre fotografías
 
         function showHome() {
             document.getElementById('home-page').style.display = 'grid';
@@ -441,24 +451,57 @@
         }
 
         function openViewer(index) {
+            stopSlideshow();
             currentIndex = index;
             updateViewer();
             document.getElementById('viewer').style.display = 'flex';
             document.body.style.overflow = 'hidden';
             header.classList.add('is-hidden');
             footer.classList.add('is-hidden');
+            startSlideshow();
         }
 
         function updateViewer() {
             const item = currentActiveGallery[currentIndex];
+            if (!item) return;
             const img = document.getElementById('viewer-img');
             img.style.opacity = '0';
+            img.onload = () => { img.style.opacity = '1'; };
+            img.onerror = () => { img.style.opacity = '1'; };
             img.src = item.url;
-            img.onload = () => img.style.opacity = '1';
             document.getElementById('viewer-caption').textContent = item.title;
+            document.getElementById('viewer-counter').textContent =
+                `${currentIndex + 1} / ${currentActiveGallery.length}`;
+        }
+
+        function startSlideshow() {
+            if (currentActiveGallery.length < 2 || slideshowTimer) return;
+            slideshowTimer = window.setInterval(() => changePhoto(1), SLIDESHOW_INTERVAL);
+            document.getElementById('slideshow-toggle').textContent = 'Ⅱ';
+            document.getElementById('slideshow-toggle').setAttribute('aria-label', 'Pausar presentación');
+            document.getElementById('slideshow-toggle').title = 'Pausar presentación';
+        }
+
+        function stopSlideshow() {
+            if (slideshowTimer) {
+                window.clearInterval(slideshowTimer);
+                slideshowTimer = null;
+            }
+            const toggle = document.getElementById('slideshow-toggle');
+            if (toggle) {
+                toggle.textContent = '▶';
+                toggle.setAttribute('aria-label', 'Reanudar presentación');
+                toggle.title = 'Reanudar presentación';
+            }
+        }
+
+        function toggleSlideshow() {
+            if (slideshowTimer) stopSlideshow();
+            else startSlideshow();
         }
 
         function closeViewer() {
+            stopSlideshow();
             document.getElementById('viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
             header.classList.remove('is-hidden');
@@ -467,6 +510,7 @@
         }
 
         function changePhoto(step) {
+            if (!currentActiveGallery.length) return;
             currentIndex = (currentIndex + step + currentActiveGallery.length) % currentActiveGallery.length;
             updateViewer();
         }
@@ -476,8 +520,25 @@
                 if (e.key === 'ArrowRight') changePhoto(1);
                 if (e.key === 'ArrowLeft') changePhoto(-1);
                 if (e.key === 'Escape') closeViewer();
+                if (e.key === ' ' && e.target.tagName !== 'BUTTON') {
+                    e.preventDefault();
+                    toggleSlideshow();
+                }
             }
         });
+
+        // Deslizar a izquierda/derecha para cambiar de foto en móviles.
+        let touchStartX = 0;
+        const viewer = document.getElementById('viewer');
+        viewer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        viewer.addEventListener('touchend', (e) => {
+            if (!touchStartX || e.changedTouches.length !== 1) return;
+            const deltaX = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(deltaX) > 55) changePhoto(deltaX < 0 ? 1 : -1);
+            touchStartX = 0;
+        }, { passive: true });
     </script>
 </body>
 </html>
